@@ -65,6 +65,20 @@ class User(Resource):
         UserModel.delete(user)
         return respond('Success', 201, 'Delete user success')
 
+    @token_required
+    @marshal_with(user_fields)
+    def put(self, current_user, userid):
+        """ Update a single user by ID."""
+        abort_if_user_doesnt_exist(userid)
+        args = parser.parse_args()
+        bio = args['bio']
+        email = args['email']
+        username = args['username']
+        user = UserModel.get_by_id(userid)
+        update = UserModel.update(user, username, email, bio)
+        return update
+
+
 # SignupUser
 # Signs up a User if not exist
 class SignupUser(Resource):
