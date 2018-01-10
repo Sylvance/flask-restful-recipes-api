@@ -43,6 +43,20 @@ parser.add_argument('password')
 # From the request headers
 parser.add_argument('Authorization', location='headers')
 
+# User
+# shows a single User item and lets you update or delete a User item
+
+class User(Resource):
+    """ Resource that gets, deletes and updates the User item"""
+
+    @token_required
+    @marshal_with(user_fields)
+    def get(self, current_user, userid):
+        """ Get a single user by ID."""
+        abort_if_user_doesnt_exist(userid)
+        user = UserModel.get_by_id(userid)
+        return user
+
 # SignupUser
 # Signs up a User if not exist
 class SignupUser(Resource):
