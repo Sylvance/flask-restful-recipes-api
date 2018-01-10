@@ -79,6 +79,20 @@ class User(Resource):
         return update
 
 
+# UserList
+# shows a list of all USERS, and lets you POST to add new bio
+class UserList(Resource):
+    """ Resource that returns a list of all Users and adds a new User."""
+
+    @token_required
+    @marshal_with(user_collection_fields)
+    @paginate()
+    def get(self, current_user):
+        """ Return all Users"""
+        USERS = UserModel.get_all()
+        return USERS
+
+    
 # SignupUser
 # Signs up a User if not exist
 class SignupUser(Resource):
