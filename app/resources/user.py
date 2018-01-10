@@ -57,6 +57,14 @@ class User(Resource):
         user = UserModel.get_by_id(userid)
         return user
 
+    @token_required
+    def delete(self, current_user, userid):
+        """ Delete a single user by ID."""
+        abort_if_user_doesnt_exist(userid)
+        user = UserModel.get_by_id(userid)
+        UserModel.delete(user)
+        return respond('Success', 201, 'Delete user success')
+
 # SignupUser
 # Signs up a User if not exist
 class SignupUser(Resource):
