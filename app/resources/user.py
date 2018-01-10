@@ -110,7 +110,7 @@ class ResetPassword(Resource):
         update = UserModel.reset_password(user, password)
         return update
 
-    
+
 # SignupUser
 # Signs up a User if not exist
 class SignupUser(Resource):
@@ -148,3 +148,32 @@ class SignupUser(Resource):
             'message': 'Wrong email or password'
         }
         return result
+
+
+# SigninUser
+# Signs in a User if registered
+class SigninUser(Resource):
+    """ Signin class"""
+    
+    def post(self):
+        """
+        Login a user if the supplied credentials are correct.
+        :return: Http Json response
+        """
+        args = parser.parse_args()
+        email = args['email']
+        password = args['password']
+        if re.match(r"[^@]+@[^@]+\.[^@]+", email) and len(password) > 6:
+            user = UserModel.get_by_email(email)
+            if user and bcrypto.check_password_hash(user.password, password):
+                token = user.encode_auth_token(user.id)
+                result = respond('Success', 
+                                 200, 
+                                 'Successfully signed In', token.decode("utf-8"))
+                return result
+            return respond('Fail', 
+                           401, 
+                           'User does not exist or incorrect password.')
+        return respond('Fail', 
+                       401, 
+                       'Wrong email or password')
