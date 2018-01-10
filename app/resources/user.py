@@ -177,3 +177,39 @@ class SigninUser(Resource):
         return respond('Fail', 
                        401, 
                        'Wrong email or password')
+
+
+# SignoutUser
+# Signs out a User if logged in
+class SignoutUser(Resource):
+    """ Signout class"""
+
+    def post(self):
+        """
+        Try to logout a user using a token
+        :return:
+        """
+        args = parser.parse_args()
+        auth_header = args['Authorization']
+        if auth_header:
+            try:
+                auth_token = auth_header.split(" ")[1]
+            except IndexError:
+                return respond('Fail', 
+                               403, 
+                               'Provide a valid auth token')
+            else:
+                decoded_token_response = UserModel.decode_auth_token(auth_token)
+                if not isinstance(decoded_token_response, str):
+                    token = BannedToken(auth_token)
+                    token.banned()
+                    return respond('Success', 
+                                   200, 
+                                   'Successfully logged out')
+                return respond('Fail', 
+                               401, 
+                               decoded_token_response)
+        return respond('Fail', 
+                       403, 
+                       'Provide an authorization header')
+                       
