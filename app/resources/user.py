@@ -92,6 +92,24 @@ class UserList(Resource):
         USERS = UserModel.get_all()
         return USERS
 
+
+# ResetPassword
+# lets you update a User item password
+
+class ResetPassword(Resource):
+    """ Resource that updates password of the User item"""
+
+    @token_required
+    @marshal_with(user_fields)
+    def put(self, current_user, userid):
+        """ Update a single user by ID."""
+        abort_if_user_doesnt_exist(userid)
+        args = parser.parse_args()
+        password = args['password']
+        user = UserModel.get_by_id(userid)
+        update = UserModel.reset_password(user, password)
+        return update
+
     
 # SignupUser
 # Signs up a User if not exist
