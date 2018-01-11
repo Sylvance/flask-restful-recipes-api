@@ -66,3 +66,17 @@ class Recipe(Resource):
         recipe = RecipeModel.get_by_id(recipeid)
         update = RecipeModel.update(recipe, recipetitle, recipedescription)
         return update
+
+
+# RecipeList
+# shows a list of all RECIPES, and lets you POST to add new description
+class RecipeList(Resource):
+    """ Resource that returns a list of all recipes and adds a new Recipe."""
+
+    @token_required
+    @marshal_with(recipe_collection_fields)
+    @paginate()
+    def get(self, current_user):
+        """ Return all recipes"""
+        RECIPES = RecipeModel.get_all()
+        return RECIPES
