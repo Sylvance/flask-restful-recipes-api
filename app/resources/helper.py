@@ -74,7 +74,7 @@ def user_only(f):
                     abort(403)
         return f(*args, **kwargs)
 
-    return decorated_functions
+    return decorated_function
 
 
 def abort_if_user_doesnt_exist(userid):

@@ -5,14 +5,14 @@
 from flask_restful import reqparse, abort, fields, marshal_with, Resource
 
 # Models
-from app.models import CategoryModel
+from app.models import UserModel, CategoryModel
 
 # Fields
 from app import meta_fields
 
 # Helpers
 from app.resources.helper import abort_if_category_doesnt_exist, respond, \
-                                paginate, token_required
+                                paginate, token_required, user_only
 
 category_fields = {
     'id': fields.Integer,
@@ -38,8 +38,11 @@ parser.add_argument('user_id')
 # shows a single Category item and lets you update or delete a Category item
 class Category(Resource):
     """ Resource that gets, deletes and updates categories. """
+    decorators = [
+        user_only,
+        token_required,
+    ]
 
-    @token_required
     @marshal_with(category_fields)
     def get(self, current_user, categoryid):
         """ Get a single category by ID."""
@@ -47,7 +50,6 @@ class Category(Resource):
         category = CategoryModel.get_by_id(categoryid)
         return category
 
-    @token_required
     def delete(self, current_user, categoryid):
         """ Delete a single category by ID."""
         abort_if_category_doesnt_exist(categoryid)
@@ -55,7 +57,6 @@ class Category(Resource):
         CategoryModel.delete(category)
         return respond('Success', 201, 'Delete category success')
 
-    @token_required
     @marshal_with(category_fields)
     def put(self, current_user, categoryid):
         """ Update a single category by ID."""
@@ -67,23 +68,31 @@ class Category(Resource):
         update = CategoryModel.update(category, categorytitle, categorydescription)
         return update
 
-
 # CategoryList
 # shows a list of all CATEGORIES, and lets you POST to add new description
 class CategoryList(Resource):
     """ Resource that returns a list of all Categories and adds a new Category."""
+    decorators = [
+        user_only,
+        token_required,
+    ]
 
-    @token_required
     @marshal_with(category_collection_fields)
     @paginate()
-    def get(self, current_user):
+    def get(self, current_user, user_id):
         """ Return all Categories"""
-        CATEGORIES = CategoryModel.get_all()
+        user = None
+        if user_id:
+            user = UserModel.get_by_id(user_id)
+
+        if not user:
+            abort(404)
+
+        CATEGORIES = CategoryModel.get_user_all(user.id)
         return CATEGORIES
 
-    @token_required
     @marshal_with(category_fields)
-    def post(self, current_user):
+    def post(self, current_user, user_id):
         """ Add a new Category"""
         args = parser.parse_args()
         categorytitle = args['categorytitle']

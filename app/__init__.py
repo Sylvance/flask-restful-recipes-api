@@ -58,16 +58,16 @@ def create_app():
 	    return render_template('index.html',
 	                           title='Home')
 
-	api.add_resource(CategoryList, '/api/v1/categories')
-	api.add_resource(RecipeList, '/api/v1/recipes')
+	api.add_resource(CategoryList, '/api/v1/user/<int:user_id>/categories')
+	api.add_resource(RecipeList, '/api/v1/category/<int:category_id>/recipes')
 	api.add_resource(UserList, '/api/v1/users')
 	api.add_resource(SignupUser, '/api/v1/signup')
 	api.add_resource(SigninUser, '/api/v1/signin')
 	api.add_resource(SignoutUser, '/api/v1/signout')
-	api.add_resource(Category, '/api/v1/category/<int:categoryid>')
-	api.add_resource(Recipe, '/api/v1/recipe/<int:recipeid>')
-	api.add_resource(User, '/api/v1/user/<int:userid>')
-	api.add_resource(ResetPassword, '/api/v1/resetpassword/user/<int:userid>')
+	api.add_resource(Category, '/api/v1/user/<int:user_id>/category/<int:categoryid>')
+	api.add_resource(Recipe, '/api/v1/category/<int:categoryid>/recipe/<int:recipeid>')
+	api.add_resource(User, '/api/v1/user/<int:user_id>')
+	api.add_resource(ResetPassword, '/api/v1/resetpassword/user/<int:user_id>')
 
 	# Enabling cors
 	CORS(app)	

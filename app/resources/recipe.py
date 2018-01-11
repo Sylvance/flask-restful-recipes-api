@@ -12,7 +12,7 @@ from app import meta_fields
 
 # Helpers
 from app.resources.helper import abort_if_recipe_doesnt_exist, respond, \
-                                 paginate, token_required
+                                 paginate, token_required, user_only
 
 recipe_fields = {
     'id': fields.Integer,
@@ -38,8 +38,11 @@ parser.add_argument('category_id')
 # shows a single Recipe item and lets you update or delete a Recipe item
 class Recipe(Resource):
     """ Resource that gets, deletes and updates the Recipe item"""
+    decorators = [
+        user_only,
+        token_required,
+    ]
 
-    @token_required
     @marshal_with(recipe_fields)
     def get(self, current_user, recipeid):
         """ Get a single recipe by ID."""
@@ -47,7 +50,6 @@ class Recipe(Resource):
         recipe = RecipeModel.get_by_id(recipeid)
         return recipe
 
-    @token_required
     def delete(self, current_user, recipeid):
         """ Delete a single recipe by ID."""
         abort_if_recipe_doesnt_exist(recipeid)
@@ -55,7 +57,6 @@ class Recipe(Resource):
         RecipeModel.delete(recipe)
         return respond('Success', 201, 'Delete recipe success')
 
-    @token_required
     @marshal_with(recipe_fields)
     def put(self, current_user, recipeid):
         """ Update a single recipe by ID."""
@@ -67,23 +68,31 @@ class Recipe(Resource):
         update = RecipeModel.update(recipe, recipetitle, recipedescription)
         return update
 
-
 # RecipeList
 # shows a list of all RECIPES, and lets you POST to add new description
 class RecipeList(Resource):
     """ Resource that returns a list of all recipes and adds a new Recipe."""
+    decorators = [
+        user_only,
+        token_required,
+    ]
 
-    @token_required
     @marshal_with(recipe_collection_fields)
     @paginate()
-    def get(self, current_user):
+    def get(self, current_user, category_id):
         """ Return all recipes"""
-        RECIPES = RecipeModel.get_all()
+        category = None
+        if category_id:
+            category = CategoryModel.get_by_id(category_id)
+
+        if not category:
+            abort(404)
+
+        RECIPES = RecipeModel.get_category_all(category.id)
         return RECIPES
 
-    @token_required
     @marshal_with(recipe_fields)
-    def post(self, current_user):
+    def post(self, current_user, category_id):
         """ Add a new Recipe"""
         args = parser.parse_args()
         recipetitle = args['recipetitle']

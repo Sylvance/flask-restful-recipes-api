@@ -76,7 +76,7 @@ class UserModel(db.Model):
         """ Persist the user in the database :param user: :return: """
         db.session.add(self)
         db.session.commit()
-        return self.encode_auth_token(self.id)
+        return self
 
     @staticmethod
     def get_all():
@@ -185,6 +185,12 @@ class CategoryModel(db.Model):
         return CATEGORIES
 
     @staticmethod
+    def get_user_all(user_id):
+        """ Get all categories """
+        CATEGORIES = CategoryModel.query.filter_by(user_id=user_id)
+        return CATEGORIES
+
+    @staticmethod
     def get_by_id(category_id):
         """ Filter a category by Id. :param category_id: :return: Category or None """
         category = CategoryModel.query.filter_by(id=category_id).first()
@@ -240,6 +246,12 @@ class RecipeModel(db.Model):
     def get_all():
         """ Get all recipes """
         RECIPES = RecipeModel.query
+        return RECIPES
+
+    @staticmethod
+    def get_category_all(category_id):
+        """ Get all categories """
+        RECIPES = RecipeModel.query.filter_by(category_id=category_id)
         return RECIPES
 
     @staticmethod

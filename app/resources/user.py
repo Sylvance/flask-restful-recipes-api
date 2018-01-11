@@ -17,7 +17,7 @@ from app import meta_fields
 
 # Helpers
 from app.resources.helper import abort_if_user_doesnt_exist, respond, \
-                                token_required, paginate
+                                token_required, user_only, paginate
 
 user_fields = {
     'id': fields.Integer,
@@ -48,50 +48,51 @@ parser.add_argument('Authorization', location='headers')
 
 class User(Resource):
     """ Resource that gets, deletes and updates the User item"""
+    decorators = [
+        user_only,
+        token_required,
+    ]
 
-    @token_required
     @marshal_with(user_fields)
-    def get(self, current_user, userid):
+    def get(self, current_user, user_id):
         """ Get a single user by ID."""
-        abort_if_user_doesnt_exist(userid)
-        user = UserModel.get_by_id(userid)
+        abort_if_user_doesnt_exist(user_id)
+        user = UserModel.get_by_id(user_id)
         return user
 
-    @token_required
-    def delete(self, current_user, userid):
+    def delete(self, current_user, user_id):
         """ Delete a single user by ID."""
-        abort_if_user_doesnt_exist(userid)
-        user = UserModel.get_by_id(userid)
+        abort_if_user_doesnt_exist(user_id)
+        user = UserModel.get_by_id(user_id)
         UserModel.delete(user)
         return respond('Success', 201, 'Delete user success')
 
-    @token_required
     @marshal_with(user_fields)
-    def put(self, current_user, userid):
+    def put(self, current_user, user_id):
         """ Update a single user by ID."""
-        abort_if_user_doesnt_exist(userid)
+        abort_if_user_doesnt_exist(user_id)
         args = parser.parse_args()
         bio = args['bio']
         email = args['email']
         username = args['username']
-        user = UserModel.get_by_id(userid)
+        user = UserModel.get_by_id(user_id)
         update = UserModel.update(user, username, email, bio)
         return update
-
 
 # UserList
 # shows a list of all USERS, and lets you POST to add new bio
 class UserList(Resource):
     """ Resource that returns a list of all Users and adds a new User."""
+    decorators = [
+        token_required,
+    ]
 
-    @token_required
     @marshal_with(user_collection_fields)
     @paginate()
     def get(self, current_user):
         """ Return all Users"""
         USERS = UserModel.get_all()
         return USERS
-
 
 # ResetPassword
 # lets you update a User item password
@@ -101,15 +102,14 @@ class ResetPassword(Resource):
 
     @token_required
     @marshal_with(user_fields)
-    def put(self, current_user, userid):
+    def put(self, current_user, user_id):
         """ Update a single user by ID."""
-        abort_if_user_doesnt_exist(userid)
+        abort_if_user_doesnt_exist(user_id)
         args = parser.parse_args()
         password = args['password']
-        user = UserModel.get_by_id(userid)
+        user = UserModel.get_by_id(user_id)
         update = UserModel.reset_password(user, password)
         return update
-
 
 # SignupUser
 # Signs up a User if not exist
@@ -126,14 +126,14 @@ class SignupUser(Resource):
         if re.match(r"[^@]+@[^@]+\.[^@]+", email) and len(password) > 6:
             user = UserModel.get_by_email(email)
             if not user:
-                token = UserModel(username=username, 
+                user = UserModel(username=username, 
                                     email=email,
                                     bio=bio, 
                                     password=password).save()
-                result = respond('Success', 
-                                  200, 
-                                  'Successfully signed up', 
-                                  token.decode("utf-8"))
+                if user:
+                    result = respond('Success', 
+                                      200, 
+                                      'Successfully signed up')
                 return result
             else:
                 result = {
@@ -148,7 +148,6 @@ class SignupUser(Resource):
             'message': 'Wrong email or password'
         }
         return result
-
 
 # SigninUser
 # Signs in a User if registered
@@ -177,7 +176,6 @@ class SigninUser(Resource):
         return respond('Fail', 
                        401, 
                        'Wrong email or password')
-
 
 # SignoutUser
 # Signs out a User if logged in
@@ -212,4 +210,3 @@ class SignoutUser(Resource):
         return respond('Fail', 
                        403, 
                        'Provide an authorization header')
-                       
