@@ -46,4 +46,12 @@ class Recipe(Resource):
         abort_if_recipe_doesnt_exist(recipeid)
         recipe = RecipeModel.get_by_id(recipeid)
         return recipe
+
+    @token_required
+    def delete(self, current_user, recipeid):
+        """ Delete a single recipe by ID."""
+        abort_if_recipe_doesnt_exist(recipeid)
+        recipe = RecipeModel.get_by_id(recipeid)
+        RecipeModel.delete(recipe)
+        return respond('Success', 201, 'Delete recipe success')
     
