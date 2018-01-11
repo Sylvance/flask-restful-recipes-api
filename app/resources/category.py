@@ -80,3 +80,20 @@ class CategoryList(Resource):
         """ Return all Categories"""
         CATEGORIES = CategoryModel.get_all()
         return CATEGORIES
+
+    @token_required
+    @marshal_with(category_fields)
+    def post(self, current_user):
+        """ Add a new Category"""
+        args = parser.parse_args()
+        categorytitle = args['categorytitle']
+        categorydescription = args['categorydescription']
+        user_id = args['user_id']
+        category = CategoryModel.get_by_title(categorytitle)
+        if not category:
+            newcategory = CategoryModel(categorytitle=categorytitle, 
+                                       categorydescription=categorydescription, 
+                                       user_id=user_id).save()
+            return newcategory
+        else:
+            return respond('Fail', 409, 'Category already exists')
