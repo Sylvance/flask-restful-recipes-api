@@ -54,3 +54,15 @@ class Category(Resource):
         category = CategoryModel.get_by_id(categoryid)
         CategoryModel.delete(category)
         return respond('Success', 201, 'Delete category success')
+
+    @token_required
+    @marshal_with(category_fields)
+    def put(self, current_user, categoryid):
+        """ Update a single category by ID."""
+        abort_if_category_doesnt_exist(categoryid)
+        args = parser.parse_args()
+        categorytitle = args['categorytitle']
+        categorydescription = args['categorydescription']
+        category = CategoryModel.get_by_id(categoryid)
+        update = CategoryModel.update(category, categorytitle, categorydescription)
+        return update
