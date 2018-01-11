@@ -54,4 +54,15 @@ class Recipe(Resource):
         recipe = RecipeModel.get_by_id(recipeid)
         RecipeModel.delete(recipe)
         return respond('Success', 201, 'Delete recipe success')
-    
+
+    @token_required
+    @marshal_with(recipe_fields)
+    def put(self, current_user, recipeid):
+        """ Update a single recipe by ID."""
+        abort_if_recipe_doesnt_exist(recipeid)
+        args = parser.parse_args()
+        recipetitle = args['recipetitle']
+        recipedescription = args['recipedescription']
+        recipe = RecipeModel.get_by_id(recipeid)
+        update = RecipeModel.update(recipe, recipetitle, recipedescription)
+        return update
