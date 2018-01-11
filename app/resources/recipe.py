@@ -80,3 +80,16 @@ class RecipeList(Resource):
         """ Return all recipes"""
         RECIPES = RecipeModel.get_all()
         return RECIPES
+
+    @token_required
+    @marshal_with(recipe_fields)
+    def post(self, current_user):
+        """ Add a new Recipe"""
+        args = parser.parse_args()
+        recipetitle = args['recipetitle']
+        recipedescription = args['recipedescription']
+        category_id = args['category_id']
+        newrecipe = RecipeModel(recipetitle=recipetitle, 
+                               recipedescription=recipedescription, 
+                               category_id=category_id).save()
+        return newrecipe
