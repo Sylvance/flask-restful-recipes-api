@@ -46,4 +46,11 @@ class Category(Resource):
         abort_if_category_doesnt_exist(categoryid)
         category = CategoryModel.get_by_id(categoryid)
         return category
-    
+
+    @token_required
+    def delete(self, current_user, categoryid):
+        """ Delete a single category by ID."""
+        abort_if_category_doesnt_exist(categoryid)
+        category = CategoryModel.get_by_id(categoryid)
+        CategoryModel.delete(category)
+        return respond('Success', 201, 'Delete category success')
