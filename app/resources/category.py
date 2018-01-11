@@ -66,3 +66,17 @@ class Category(Resource):
         category = CategoryModel.get_by_id(categoryid)
         update = CategoryModel.update(category, categorytitle, categorydescription)
         return update
+
+
+# CategoryList
+# shows a list of all CATEGORIES, and lets you POST to add new description
+class CategoryList(Resource):
+    """ Resource that returns a list of all Categories and adds a new Category."""
+
+    @token_required
+    @marshal_with(category_collection_fields)
+    @paginate()
+    def get(self, current_user):
+        """ Return all Categories"""
+        CATEGORIES = CategoryModel.get_all()
+        return CATEGORIES
