@@ -85,8 +85,8 @@ To build a tree structure diagram in windows run this command;
 |           
 +---cover
 |       
-+---migrations
-        
++---migrations     
+```
 
 Resources
 ---------
