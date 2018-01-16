@@ -42,4 +42,9 @@ Run the tests:
 Resources
 ---------
 
+| Col A | Col B | Col C|
+|---|---|---|
+| A1 | B1 | C1 |
+| A2 |  | :smile: |
+
 
