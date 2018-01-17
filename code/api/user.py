@@ -10,11 +10,16 @@ from code.models.token import Token
 from code.helpers import paginate
 
 user_parser = reqparse.RequestParser()
-user_parser.add_argument('username')
-user_parser.add_argument('password')
-user_parser.add_argument('email')
-user_parser.add_argument('first_name')
-user_parser.add_argument('last_name')
+user_parser.add_argument('username', required=True, \
+                        help="Name cannot be blank!")
+user_parser.add_argument('password', required=True, \
+                        help="Password cannot be blank!")
+user_parser.add_argument('email', required=True, \
+                        help="Email cannot be blank!")
+user_parser.add_argument('first_name', required=True, \
+                        help="First name cannot be blank!")
+user_parser.add_argument('last_name', required=True, \
+                        help="Last name cannot be blank!")
 
 # From the request headers
 parser = reqparse.RequestParser()
