@@ -35,7 +35,7 @@ class Category(SurrogatePK, Model):
 
     @classmethod
     def get_user_all(cls, user_id):
-        return cls.query.filter_by(user_id=user_id).first()
+        return cls.query.filter_by(user_id=user_id)
 
     def __repr__(self):  # pragma: nocover
         return '<Category({title!r})>'.format(title=self.title)

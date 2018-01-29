@@ -1,21 +1,28 @@
 #!/usr/bin/env python
-
+import re
 from flask import abort, g
 from flask_restful import Resource, reqparse, marshal_with, fields
 
 from code.api import api, meta_fields
-from code.api.auth import self_only, token_required
+from code.api.auth import self_only, token_required, ensure_auth_header
 from code.models.recipe import Recipe
 from code.models.category import Category
-from code.helpers import paginate
+from code.helpers import paginate, abort_if_exists
+
+def valid_str(value, name):
+    if ' ' in value:
+        raise ValueError("The parameter '{}' has spaces in: {}".format(name, value))
+    if re.match(r'[A-Za-z]+$', value) is None:
+        raise ValueError("Non-alphabetic characters for '{}' are not allowed in: {}".format(name, value))
+    return value
 
 recipe_parser = reqparse.RequestParser()
-recipe_parser.add_argument('title', type=str)
-recipe_parser.add_argument('description', type=str)
-recipe_parser.add_argument('category_id', type=int)
+recipe_parser.add_argument('title', type=valid_str)
+recipe_parser.add_argument('description', type=valid_str)
+recipe_parser.add_argument('category_id', type=str)
 
 recipe_collection_parser = reqparse.RequestParser()
-recipe_collection_parser.add_argument('title', type=str)
+recipe_collection_parser.add_argument('title', type=valid_str)
 
 
 # Marshaled field definitions for recipe objects
@@ -37,6 +44,7 @@ recipe_collection_fields = {
 
 class RecipeResource(Resource):
 
+    @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(recipe_fields)
@@ -48,6 +56,7 @@ class RecipeResource(Resource):
 
         return recipe
 
+    @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(recipe_fields)
@@ -60,6 +69,7 @@ class RecipeResource(Resource):
         recipe.update(**recipe_parser.parse_args())
         return recipe
 
+    @ensure_auth_header
     @token_required
     @self_only
     def delete(self, current_user, recipe_id=0, **kwargs):
@@ -69,11 +79,17 @@ class RecipeResource(Resource):
             abort(404)
 
         recipe.delete()
-        return {}, 204
+        result = {
+            'status': 'Deleted',
+            'status code': 204,
+            'message': 'Recipe deleted successfully'
+        }
+        return result, 204
 
 
 class RecipeCollectionResource(Resource):
 
+    @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(recipe_collection_fields)
@@ -99,11 +115,13 @@ class RecipeCollectionResource(Resource):
 
         return recipes
 
+    @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, title=None):
         args = recipe_parser.parse_args()
+        abort_if_exists(g.user.id, category_id=category_id, recipe_name=args['title'])
         recipe = Recipe.create(**args)
         return recipe, 201
 

@@ -17,6 +17,17 @@ def self_only(func):
         return func(*args, **kwargs)
     return wrapper
 
+def ensure_auth_header(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'Authorization' not in request.headers:
+            return make_response(jsonify({
+                'status': 'Failed',
+                'message': 'Access is denied. Please provide request with the Authentication header.'
+            }), 403)
+        return func(*args, **kwargs)
+    return wrapper
+
 def token_required(f):
     """
     Decorator function to ensure that a resource is access by only authenticated users`
@@ -49,7 +60,13 @@ def token_required(f):
             decode_response = User.decode_auth_token(token)
             current_user = User.query.filter_by(
                 id=decode_response).first()
-            g.user = current_user
+            if current_user:
+                g.user = current_user
+            else:
+                return make_response(jsonify({
+                    'status': 'Failed',
+                    'message': "Integrity credentials for provided token are lacking."
+                }), 401)
         except:
             message = 'Invalid token'
             if isinstance(decode_response, str):

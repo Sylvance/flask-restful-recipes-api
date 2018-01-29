@@ -4,22 +4,33 @@ from flask import abort, g
 from flask_restful import Resource, reqparse, marshal_with, fields
 
 from code.api import api, meta_fields
-from code.api.auth import self_only, token_required
+from code.api.auth import self_only, token_required, ensure_auth_header
 from code.models.user import User
 from code.models.token import Token
 from code.helpers import paginate
 
+def valid_str(value, name):
+    if ' ' in value:
+        raise ValueError("The parameter '{}' has spaces in: {}".format(name, value))
+    if re.match(r'[A-Za-z]+$', value) is None:
+        raise ValueError("Non-alphabetic characters for '{}' are not allowed in: {}".format(name, value))
+    return value
+
+def valid_id(value, name):
+    if ' ' in value:
+        raise ValueError("The parameter '{}' has spaces in: {}".format(name, value))
+    if re.match(r'[0-9]+$', value) is None:
+        raise ValueError("Non-integer characters for '{}' are not allowed in: {}".format(name, value))
+    return value
+
 user_parser = reqparse.RequestParser()
-user_parser.add_argument('username', required=True, \
-                        help="Name cannot be blank!")
-user_parser.add_argument('password', required=True, \
+user_parser.add_argument('username', type = valid_str)
+user_parser.add_argument('password', type = str, \
                         help="Password cannot be blank!")
-user_parser.add_argument('email', required=True, \
+user_parser.add_argument('email', type = str, \
                         help="Email cannot be blank!")
-user_parser.add_argument('first_name', required=True, \
-                        help="First name cannot be blank!")
-user_parser.add_argument('last_name', required=True, \
-                        help="Last name cannot be blank!")
+user_parser.add_argument('first_name', type = valid_str)
+user_parser.add_argument('last_name', type = valid_str)
 
 # From the request headers
 parser = reqparse.RequestParser()
@@ -49,6 +60,7 @@ user_collection_fields = {
 
 
 class UserResource(Resource):
+    @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(user_fields)
@@ -65,6 +77,7 @@ class UserResource(Resource):
 
         return user
 
+    @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(user_fields)
@@ -72,6 +85,7 @@ class UserResource(Resource):
         g.user.update(**user_parser.parse_args())
         return g.user
 
+    @ensure_auth_header
     @token_required
     @self_only
     def delete(self, current_user, user_id=None, username=None):
@@ -81,7 +95,7 @@ class UserResource(Resource):
             'status code': 204,
             'message': 'User has been deleted'
         }
-        return result, 204
+        return result
 
 
 class UserCollectionResource(Resource):
@@ -90,13 +104,13 @@ class UserCollectionResource(Resource):
     def get(self):
         users = User.query
         return users
-
+    
     def post(self):
         args = user_parser.parse_args()
         email = args['email']
         username = args['username']
         password = args['password']
-        if re.match(r"[^@]+@[^@]+\.[^@]+", email) and len(password) > 6:
+        if re.match(r"(^[a-zA-Z0-9_.]+@[a-zA-Z0-9-]+\.[a-z]+$)", email) and len(password) > 6:
             userbyemail = User.get_by_email(email)
             # userbyname = User.get_by_username(username)
             if not userbyemail:
@@ -132,7 +146,7 @@ class UserCollectionResource(Resource):
 
 
 class UserSigninResource(Resource):
-
+    
     def post(self):
         args = user_parser.parse_args()
         email = args['email']
