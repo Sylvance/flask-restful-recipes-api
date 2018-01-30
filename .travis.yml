@@ -8,7 +8,7 @@ service:
 
 before_install:
   - export FLASK_APP=run.py
-  - export FLASK_CONFIG="testing"
+  - export FLASK_ENV="testing"
   
 install:
   - pip install -r requirements.txt

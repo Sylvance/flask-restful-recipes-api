@@ -4,7 +4,7 @@
 
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
 
 from code.settings import ProdConfig, DevConfig
@@ -27,6 +27,12 @@ def create_app(config_object=DefaultConfig):
     '''
     app = Flask(__name__)
     app.config.from_object(config_object)
+    # Documentation
+    @app.route('/')
+    @app.route('/index')
+    def index():
+        """ Here the user sees the signup and signin gateways """
+        return render_template('index.html', title='Home')
     # Enabling cors
     CORS(app)	
     register_extensions(app)
