@@ -25,7 +25,7 @@ class DevConfig(Config):
     """Development configuration."""
     ENV = 'dev'
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql:///recipesdemo'
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql:///recipesdemo')
 
 
 class TestConfig(Config):
