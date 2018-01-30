@@ -1,0 +1,21 @@
+# Everything needed in production
+
+# Flask
+Flask
+Flask-RESTful
+
+# Database
+Flask-SQLAlchemy
+psycopg2
+
+# Migrations
+Flask-Migrate
+
+# Cors
+Flask-Cors
+
+# Deployment
+gunicorn
+
+# Auth
+Flask-JWT

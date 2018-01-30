@@ -1,5 +1,5 @@
 new Apiary.Embed({
-    "subdomain": "sylvance1",
+    "subdomain": "sylvance",
     "preferences": {
         "element": "#documentation",
         "displayHttpMethods": true
