@@ -16,7 +16,7 @@ install:
   - pip install coverage
 
 before_script:
-  - psql -c 'create database recipesdemotest;' -U postgres
+  - psql -c 'create database recipesdemo;' -U postgres
   - flask db init
   - flask db migrate
   - flask db upgrade
