@@ -19,7 +19,6 @@ def valid_str(value, name):
 recipe_parser = reqparse.RequestParser()
 recipe_parser.add_argument('title', type=valid_str)
 recipe_parser.add_argument('description', type=valid_str)
-recipe_parser.add_argument('category_id', type=str)
 
 recipe_collection_parser = reqparse.RequestParser()
 recipe_collection_parser.add_argument('title', type=valid_str)
@@ -48,7 +47,7 @@ class RecipeResource(Resource):
     @token_required
     @self_only
     @marshal_with(recipe_fields)
-    def get(self, current_user, recipe_id=0, **kwargs):
+    def get(self, current_user, category_id=None, recipe_id=0, **kwargs):
         recipe = Recipe.get_by_id(recipe_id)
 
         if not recipe:
@@ -60,8 +59,11 @@ class RecipeResource(Resource):
     @token_required
     @self_only
     @marshal_with(recipe_fields)
-    def post(self, current_user, recipe_id=0, **kwargs):
+    def post(self, current_user, category_id=None, recipe_id=0, **kwargs):
+        args = recipe_parser.parse_args()
         recipe = Recipe.get_by_id(recipe_id)
+        # abort if recipe exists
+        abort_if_exists(g.user.id, category_id=category_id, recipe_name=args['title'])
 
         if not recipe:
             abort(404)
@@ -72,7 +74,7 @@ class RecipeResource(Resource):
     @ensure_auth_header
     @token_required
     @self_only
-    def delete(self, current_user, recipe_id=0, **kwargs):
+    def delete(self, current_user, category_id=None, recipe_id=0, **kwargs):
         recipe = Recipe.get_by_id(recipe_id)
 
         if not recipe:
@@ -84,7 +86,7 @@ class RecipeResource(Resource):
             'status code': 204,
             'message': 'Recipe deleted successfully'
         }
-        return result, 204
+        return result
 
 
 class RecipeCollectionResource(Resource):
@@ -121,6 +123,10 @@ class RecipeCollectionResource(Resource):
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, title=None):
         args = recipe_parser.parse_args()
+        category = Category.get_by_id(category_id)
+        if not category:
+            abort(404)
+        # abort if recipe exists
         abort_if_exists(g.user.id, category_id=category_id, recipe_name=args['title'])
         recipe = Recipe.create(**args)
         return recipe, 201
