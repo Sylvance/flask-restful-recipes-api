@@ -19,7 +19,6 @@ def valid_str(value, name):
 category_parser = reqparse.RequestParser()
 category_parser.add_argument('title', type=valid_str)
 category_parser.add_argument('description', type=str)
-
 category_collection_parser = reqparse.RequestParser()
 category_collection_parser.add_argument('title', type=valid_str)
 
