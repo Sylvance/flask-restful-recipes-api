@@ -16,13 +16,13 @@ install:
   - pip install coverage
 
 before_script:
-  - psql -c 'create database recipesdemotest;' -U postgres
+  - psql -c 'create database recipesdemo;' -U postgres
   - flask db init
   - flask db migrate
   - flask db upgrade
 
 script:
-  - nosetests --with-coverage --cover-erase --cover-package=app
+  - nosetests --with-coverage --cover-erase --cover-package=code
 
 after_success:
   - coveralls

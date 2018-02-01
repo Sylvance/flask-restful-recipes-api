@@ -18,8 +18,7 @@ def valid_str(value, name):
 
 category_parser = reqparse.RequestParser()
 category_parser.add_argument('title', type=valid_str)
-category_parser.add_argument('description', type=valid_str)
-
+category_parser.add_argument('description', type=str)
 category_collection_parser = reqparse.RequestParser()
 category_collection_parser.add_argument('title', type=valid_str)
 
@@ -49,10 +48,8 @@ class CategoryResource(Resource):
     @marshal_with(category_fields)
     def get(self, current_user, user_id=None, category_id=0, **kwargs):
         category = Category.get_by_id(category_id)
-
         if not category:
             abort(404)
-
         return category
 
     @ensure_auth_header
@@ -61,6 +58,8 @@ class CategoryResource(Resource):
     @marshal_with(category_fields)
     def post(self, current_user, user_id=None, category_id=0, **kwargs):
         category = Category.get_by_id(category_id)
+        args = category_parser.parse_args()
+        abort_if_exists(g.user.id, category_name=args['title'])
 
         if not category:
             abort(404)
@@ -83,7 +82,7 @@ class CategoryResource(Resource):
             'status code': 204,
             'message': 'Category deleted successfully'
         }
-        return result, 204
+        return result
 
 
 class CategoryCollectionResource(Resource):

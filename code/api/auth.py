@@ -4,16 +4,31 @@ import functools
 from functools import wraps
 from flask import g, abort, request, make_response, jsonify
 from code.models.user import User
+from code.models.category import Category
+from code.models.recipe import Recipe
 
 def self_only(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         if kwargs.get('username', None):
             if g.user.username != kwargs['username']:
-                abort(403)
+                abort(403, {"status" : "Access denied","state" : "Entity not accessible to current user. Provide valid name or id."})
         if kwargs.get('user_id', None):
             if g.user.id != kwargs['user_id']:
-                abort(403)
+                abort(403, {"status" : "Access denied","state" : "Entity not accessible to current user. Provide valid name or id."})
+        if kwargs.get('category_id', None):
+            category = Category.get_by_id(kwargs['category_id'])
+            if not category:
+                abort(404, {"status" : "Bad request","state" : "Category does not exist"})
+            if g.user.id != category.user_id:
+                abort(403, {"status" : "Access denied","state" : "Entity not accessible to current user. Provide valid name or id."})
+        if kwargs.get('recipe_id', None):
+            recipe = Recipe.get_by_id(kwargs['recipe_id'])
+            category = Category.get_by_id(recipe.category_id)
+            if not recipe:
+                abort(404, {"status" : "Bad request","state" : "Recipe does not exist"})
+            if g.user.id != category.user_id:
+                abort(403, {"status" : "Access denied","state" : "Entity not accessible to current user. Provide valid name or id."})
         return func(*args, **kwargs)
     return wrapper
 
