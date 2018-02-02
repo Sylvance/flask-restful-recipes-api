@@ -110,4 +110,4 @@ All URIs are relative to *https://resapi.herokuapp.com/api*
 |---| **POST** /users | Sign up a user
 |---| **POST** /users/signin | Sign in a user
 |---| **GET** /users/signout | Sign out a user
-| :joy: | :clapping: | :smile: |
+| :joy: | :open_mouth: | :smile: |
