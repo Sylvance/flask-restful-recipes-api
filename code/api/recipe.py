@@ -19,6 +19,7 @@ def valid_str(value, name):
 recipe_parser = reqparse.RequestParser()
 recipe_parser.add_argument('title', type=valid_str)
 recipe_parser.add_argument('description', type=valid_str)
+recipe_parser.add_argument('category_id', type=int)
 
 recipe_collection_parser = reqparse.RequestParser()
 recipe_collection_parser.add_argument('title', type=valid_str)

@@ -24,9 +24,9 @@ def self_only(func):
                 abort(403, {"status" : "Access denied","state" : "Entity not accessible to current user. Provide valid name or id."})
         if kwargs.get('recipe_id', None):
             recipe = Recipe.get_by_id(kwargs['recipe_id'])
-            category = Category.get_by_id(recipe.category_id)
             if not recipe:
                 abort(404, {"status" : "Bad request","state" : "Recipe does not exist"})
+            category = Category.get_by_id(recipe.category_id)
             if g.user.id != category.user_id:
                 abort(403, {"status" : "Access denied","state" : "Entity not accessible to current user. Provide valid name or id."})
         return func(*args, **kwargs)
