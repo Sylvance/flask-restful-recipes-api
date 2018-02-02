@@ -1,0 +1,456 @@
+FORMAT: 1A
+HOST: http://localhost:5000/api
+
+# YUMMY RECIPES API DOCUMENTATION
+Yummy recipes provides a platform for users to keep track of their awesome recipes and share with others if they so wish.
+
+## Authentication
+This API uses OAuth v2 Bearer Token / Personal Access Token for its authentication.
+
+# Group Users
+
+## Users [/users]
+
+### Sign up users [POST]
+This will sign up a new user and save his/her details in the database.
+
++ Request (application/json)
+    + Attributes (Sign up usersRequest)
+
+    + Body
+
+            {
+                "username": "Sylvance",
+                "first_name": "Sylvance",
+                "last_name": "Kerandi",
+                "email": "kerandisylvance@gmail.com",
+                "password": "starwars"
+            }
+
+
++ Response 200 
+
+
+
+
+## Users Signin [/users/signin]
+
+### Sign in user [POST]
+This will sign in a user and return a token as the response.
+
++ Request (application/json)
+    + Attributes (Sign in userRequest)
+
+    + Body
+
+            {
+                "email": "kerandisylvance@gmail.com",
+                "password": "starwars"
+            }
+
+
++ Response 200 
+
+
+
+
+## Users Signout [/users/signout]
+
+### Sign out user [GET]
+This will sign out a user when given an authentication token.
+
++ Response 200 
+
+
+
+
+
+# Group Categories
+
+## Users 1 Categories [/users/1/categories]
+
+### Get all categories for a user [GET]
+This will get all categories that belong to a particular user.
+
++ Response 200 
+
+
+
+### Create a new category [POST]
+This will create a new category under the users account.
+
++ Request (application/json)
+    + Attributes (Create a new categoryRequest)
+
+    + Body
+
+            {
+                "title": "Kenyan",
+                "description": "Dishes"
+            }
+
+
++ Response 201 (application/json)
+    + Attributes (Create a new categoryResponse)
+
+    + Body
+
+            {
+                "id": 3,
+                "user_id": 1,
+                "title": "Kenyan",
+                "description": "Dishes",
+                "created_at": "Mon, 29 Jan 2018 19:36:07 -0000",
+                "modified_at": "Mon, 29 Jan 2018 19:36:07 -0000"
+            }
+
+
+
+## Users 1 Categories 1 [/users/1/categories/1]
+
+### Get category by id [GET]
+This will get a user's category by its id.
+
++ Response 200 (application/json)
+    + Attributes (Get category by idResponse)
+
+    + Body
+
+            {
+                "id": 1,
+                "user_id": 1,
+                "title": "Kenyan",
+                "description": "Dishes",
+                "created_at": "Mon, 29 Jan 2018 19:21:30 -0000",
+                "modified_at": "Mon, 29 Jan 2018 19:21:30 -0000"
+            }
+
+
+### Update category by id [POST]
+This will update a category by its id. It will also update the modified timestamp
+
++ Request (application/json)
+    + Attributes (Update category by idRequest)
+
+    + Body
+
+            {
+                "title": "Tanzanian",
+                "description": "Dishes"
+            }
+
+
++ Response 200 (application/json)
+    + Attributes (Update category by idResponse)
+
+    + Body
+
+            {
+                "id": 1,
+                "user_id": 1,
+                "title": "Tanzanian",
+                "description": "Dishes",
+                "created_at": "Mon, 29 Jan 2018 19:21:30 -0000",
+                "modified_at": "Mon, 29 Jan 2018 19:31:41 -0000"
+            }
+
+
+### Delete category by id [DELETE]
+This will delete a category by id for a particular user.
+
++ Response 204 
+
+    + Headers
+
+            Access-Control-Allow-Origin:*
+            Content-Length:100
+            Date:Mon, 29 Jan 2018 16:38:31 GMT
+            Server:Werkzeug/0.14.1 Python/3.6.4
+
+    + Attributes (object)
+
+
+
+
+# Group Recipes
+
+## Categories 2 Recipes [/categories/2/recipes]
+
+### Get all recipes in a category [GET]
+This will get all the recipes that belong to a category for a particular user.
+
++ Response 200 (application/json)
+    + Attributes (Get all recipes in a categoryResponse)
+
+    + Body
+
+            {
+                "items": [],
+                "meta": {
+                    "page": 1,
+                    "limit": 3,
+                    "total": 0,
+                    "pages": 0,
+                    "links": {
+                        "prev": null,
+                        "next": null,
+                        "first": "/api/categories/2/recipes?page=1&limit=3",
+                        "last": "/api/categories/2/recipes?page=0&limit=3"
+                    }
+                }
+            }
+
+
+### Create a new recipe [POST]
+This will create a new recipe for the category.
+
++ Request (application/json)
+    + Attributes (Create a new recipeRequest)
+
+    + Body
+
+            {
+                "category_id": 2,
+                "title": "uji",
+                "description": "white"
+            }
+
+
++ Response 201 (application/json)
+    + Attributes (Create a new recipeResponse)
+
+    + Body
+
+            {
+                "id": 3,
+                "category_id": 2,
+                "title": "uji",
+                "description": "white",
+                "created_at": "Mon, 29 Jan 2018 19:52:49 -0000",
+                "modified_at": "Mon, 29 Jan 2018 19:52:49 -0000"
+            }
+
+
+
+## Categories 2 Recipes 3 [/categories/2/recipes/3]
+
+### Get recipe by id [GET]
+This will get your recipe by the id for the containing category for a particular user.
+
++ Response 200 (application/json)
+    + Attributes (Get recipe by idResponse)
+
+    + Body
+
+            {
+                "id": 3,
+                "category_id": 2,
+                "title": "uji",
+                "description": "white",
+                "created_at": "Mon, 29 Jan 2018 19:52:49 -0000",
+                "modified_at": "Mon, 29 Jan 2018 19:52:49 -0000"
+            }
+
+
+### Update recipe by id [POST]
+This will update your recipe by id for a particular user in its containing category.
+
++ Request (application/json)
+    + Attributes (Update recipe by idRequest)
+
+    + Body
+
+            {
+                "title": "porridge",
+                "description": "brown"
+            }
+
+
++ Response 200 (application/json)
+    + Attributes (Update recipe by idResponse)
+
+    + Body
+
+            {
+                "id": 3,
+                "category_id": 2,
+                "title": "porridge",
+                "description": "brown",
+                "created_at": "Mon, 29 Jan 2018 19:52:49 -0000",
+                "modified_at": "Mon, 29 Jan 2018 20:00:43 -0000"
+            }
+
+
+
+## Categories 2 Recipes 2 [/categories/2/recipes/2]
+
+### Delete recipe by id [DELETE]
+This will delete a recipe by id for a particular user in its containing category
+
++ Response 204 
+
+    + Headers
+
+            Access-Control-Allow-Origin:*
+            Content-Length:98
+            Date:Mon, 29 Jan 2018 17:04:29 GMT
+            Server:Werkzeug/0.14.1 Python/3.6.4
+
+    + Attributes (object)
+
+
+
+
+# Data Structures
+
+## Sign up usersRequest (object)
+
+
+### Properties
++ `username`: `Sylvance` (string, required) 
++ `first_name`: `Sylvance` (string, required) 
++ `last_name`: `Kerandi` (string, required) 
++ `email`: `kerandisylvance@gmail.com` (string, required) 
++ `password`: `starwars` (string, required) 
+
+
+## Sign in userRequest (object)
+
+
+### Properties
++ `email`: `kerandisylvance@gmail.com` (string, required) 
++ `password`: `starwars` (string, required) 
+
+
+## Create a new categoryRequest (object)
+
+
+### Properties
++ `title`: `Kenyan` (string, required) 
++ `description`: `Dishes` (string, required) 
+
+
+## Create a new categoryResponse (object)
+
+
+### Properties
++ `id`: `3` (number, required) 
++ `user_id`: `1` (number, required) 
++ `title`: `Kenyan` (string, required) 
++ `description`: `Dishes` (string, required) 
++ `created_at`: `Mon, 29 Jan 2018 19:36:07 -0000` (string, required) 
++ `modified_at`: `Mon, 29 Jan 2018 19:36:07 -0000` (string, required) 
+
+
+## Get category by idResponse (object)
+
+
+### Properties
++ `id`: `1` (number, required) 
++ `user_id`: `1` (number, required) 
++ `title`: `Kenyan` (string, required) 
++ `description`: `Dishes` (string, required) 
++ `created_at`: `Mon, 29 Jan 2018 19:21:30 -0000` (string, required) 
++ `modified_at`: `Mon, 29 Jan 2018 19:21:30 -0000` (string, required) 
+
+
+## Update category by idRequest (object)
+
+
+### Properties
++ `title`: `Tanzanian` (string, required) 
++ `description`: `Dishes` (string, required) 
+
+
+## Update category by idResponse (object)
+
+
+### Properties
++ `id`: `1` (number, required) 
++ `user_id`: `1` (number, required) 
++ `title`: `Tanzanian` (string, required) 
++ `description`: `Dishes` (string, required) 
++ `created_at`: `Mon, 29 Jan 2018 19:21:30 -0000` (string, required) 
++ `modified_at`: `Mon, 29 Jan 2018 19:31:41 -0000` (string, required) 
+
+
+## Get all recipes in a categoryResponse (object)
+
+
+### Properties
++ `items`: `[]` (array[string], required) 
++ `meta`: `[]` (Meta, required) 
+
+
+## Meta (object)
+
+
+### Properties
++ `page`: `1` (number, required) 
++ `limit`: `3` (number, required) 
++ `total`: `0` (number, required) 
++ `pages`: `0` (number, required) 
++ `links`: `0` (Links, required) 
+
+
+## Links (object)
+
+
+### Properties
++ `prev` (string, required, nullable) 
++ `next` (string, required, nullable) 
++ `first`: `/api/categories/2/recipes?page=1&limit=3` (string, required) 
++ `last`: `/api/categories/2/recipes?page=0&limit=3` (string, required) 
+
+
+## Create a new recipeRequest (object)
+
+
+### Properties
++ `category_id`: `2` (number, required) 
++ `title`: `uji` (string, required) 
++ `description`: `white` (string, required) 
+
+
+## Create a new recipeResponse (object)
+
+
+### Properties
++ `id`: `3` (number, required) 
++ `category_id`: `2` (number, required) 
++ `title`: `uji` (string, required) 
++ `description`: `white` (string, required) 
++ `created_at`: `Mon, 29 Jan 2018 19:52:49 -0000` (string, required) 
++ `modified_at`: `Mon, 29 Jan 2018 19:52:49 -0000` (string, required) 
+
+
+## Get recipe by idResponse (object)
+
+
+### Properties
++ `id`: `3` (number, required) 
++ `category_id`: `2` (number, required) 
++ `title`: `uji` (string, required) 
++ `description`: `white` (string, required) 
++ `created_at`: `Mon, 29 Jan 2018 19:52:49 -0000` (string, required) 
++ `modified_at`: `Mon, 29 Jan 2018 19:52:49 -0000` (string, required) 
+
+
+## Update recipe by idRequest (object)
+
+
+### Properties
++ `title`: `porridge` (string, required) 
++ `description`: `brown` (string, required) 
+
+
+## Update recipe by idResponse (object)
+
+
+### Properties
++ `id`: `3` (number, required) 
++ `category_id`: `2` (number, required) 
++ `title`: `porridge` (string, required) 
++ `description`: `brown` (string, required) 
++ `created_at`: `Mon, 29 Jan 2018 19:52:49 -0000` (string, required) 
++ `modified_at`: `Mon, 29 Jan 2018 20:00:43 -0000` (string, required)
