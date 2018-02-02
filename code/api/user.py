@@ -7,7 +7,7 @@ from code.api import api, meta_fields
 from code.api.auth import self_only, token_required, ensure_auth_header
 from code.models.user import User
 from code.models.token import Token
-from code.helpers import paginate
+from code.helpers import paginate, validate_json
 
 def valid_str(value, name):
     if ' ' in value:
@@ -80,6 +80,7 @@ class UserResource(Resource):
     @ensure_auth_header
     @token_required
     @self_only
+    @validate_json
     @marshal_with(user_fields)
     def post(self, current_user, user_id=None, username=None):
         g.user.update(**user_parser.parse_args())
@@ -105,6 +106,7 @@ class UserCollectionResource(Resource):
         users = User.query
         return users
     
+    @validate_json
     def post(self):
         args = user_parser.parse_args()
         email = args['email']
@@ -147,6 +149,7 @@ class UserCollectionResource(Resource):
 
 class UserSigninResource(Resource):
     
+    @validate_json
     def post(self):
         args = user_parser.parse_args()
         email = args['email']

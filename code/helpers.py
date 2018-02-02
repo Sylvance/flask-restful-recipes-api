@@ -1,9 +1,24 @@
 #!/usr/bin/env python
 
 import functools
+from functools import wraps
 from flask import request, url_for, abort, json
 from code.models.recipe import Recipe
 from code.models.category import Category
+from werkzeug.exceptions import BadRequest
+
+
+def validate_json(f):
+    @wraps(f)
+    def wrapper(*args, **kw):
+        try:
+            request.json
+        except BadRequest as e:
+            msg = "Payload must be a valid json"
+            response = {"error": msg}
+            return response, 400
+        return f(*args, **kw)
+    return wrapper
 
 
 def paginate(max_limit=3):

@@ -1,677 +1,770 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>YUMMY RECIPES API DOCUMENTATION</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:black;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #f2f2f2;margin-bottom:12px}h1,h2,h3,h4,h5{color:black;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#428bca;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 51.4%, rgba(255,255,255,0.2) 51.4%, rgba(255,255,255,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(0,0,0,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:6px;overflow:auto}pre code{color:black;background-color:transparent;padding:0;border:none}code{color:#444;background-color:#f5f5f5;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:black;background-color:#f0f6fb;border-left:4px solid #428bca}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#428bca}.warning{color:black;background-color:#fbf1f0;border-left:4px solid #c9302c}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#c9302c}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:black;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(0,0,0,0.7);padding:8px 12px;border-top:1px solid #d9d9d9;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#000;background-color:#f2f2f2;border-radius:10px;margin:-2px 0}.badge.get{color:#70bbe1;background-color:#d9edf7}.badge.head{color:#70bbe1;background-color:#d9edf7}.badge.options{color:#70bbe1;background-color:#d9edf7}.badge.put{color:#f0db70;background-color:#fcf8e3}.badge.patch{color:#f0db70;background-color:#fcf8e3}.badge.post{color:#93cd7c;background-color:#dff0d8}.badge.delete{color:#ce8383;background-color:#f2dede}.collapse-button{float:right}.collapse-button .close{display:none;color:#428bca;cursor:pointer}.collapse-button .open{color:#428bca;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#428bca}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:white}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#56b82e}.definition .method.put{color:#b8a22e}.definition .method.patch{color:#b8a22e}.definition .method.delete{color:#b82e2e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:black;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:white;border:1px solid #666;border-radius:6px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(0,0,0,0.5);background-color:#f2f2f2;text-decoration:none !important;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:white;border:1px solid #d9d9d9;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#f2f2f2;border-bottom:1px solid #d9d9d9;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #d9d9d9}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#fff;background-color:#337ab7}.action h4.action-heading .method.head{color:#fff;background-color:#337ab7}.action h4.action-heading .method.options{color:#fff;background-color:#337ab7}.action h4.action-heading .method.put{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.patch{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.post{color:#fff;background-color:#5cb85c}.action h4.action-heading .method.delete{color:#fff;background-color:#d9534f}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid white;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#bce8f1}.action.get h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.head{border-color:#bce8f1}.action.head h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.options{border-color:#bce8f1}.action.options h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.post{border-color:#d6e9c6}.action.post h4.action-heading{color:#5cb85c;background:#dff0d8;border-bottom-color:#d6e9c6}.action.put{border-color:#faebcc}.action.put h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.patch{border-color:#faebcc}.action.patch h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.delete{border-color:#ebccd1}.action.delete h4.action-heading{color:#d9534f;background:#f2dede;border-bottom-color:#ebccd1}</style></head><body class="preload"><div id="nav-background"></div><div class="container-fluid triple"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#top">Overview</a></div><div class="collapse-content"><ul><li><a href="#header-authentication">Authentication</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#users">Users</a></div><div class="collapse-content"><ul><li><a href="#users-users-post"><span class="badge post"><i class="fa fa-plus"></i></span>Sign up users</a></li><li><a href="#users-users-signin-post"><span class="badge post"><i class="fa fa-plus"></i></span>Sign in user</a></li><li><a href="#users-users-signout-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Sign out user</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#categories">Categories</a></div><div class="collapse-content"><ul><li><a href="#categories-users-1-categories">Users 1 Categories</a><ul><li><a href="#categories-users-1-categories-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get all categories for a user</a></li><li><a href="#categories-users-1-categories-post"><span class="badge post"><i class="fa fa-plus"></i></span>Create a new category</a></li></ul></li><li><a href="#categories-users-1-categories-1">Users 1 Categories 1</a><ul><li><a href="#categories-users-1-categories-1-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get category by id</a></li><li><a href="#categories-users-1-categories-1-post"><span class="badge post"><i class="fa fa-plus"></i></span>Update category by id</a></li><li><a href="#categories-users-1-categories-1-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Delete category by id</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#recipes">Recipes</a></div><div class="collapse-content"><ul><li><a href="#recipes-categories-2-recipes">Categories 2 Recipes</a><ul><li><a href="#recipes-categories-2-recipes-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get all recipes in a category</a></li><li><a href="#recipes-categories-2-recipes-post"><span class="badge post"><i class="fa fa-plus"></i></span>Create a new recipe</a></li></ul></li><li><a href="#recipes-categories-2-recipes-3">Categories 2 Recipes 3</a><ul><li><a href="#recipes-categories-2-recipes-3-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get recipe by id</a></li><li><a href="#recipes-categories-2-recipes-3-post"><span class="badge post"><i class="fa fa-plus"></i></span>Update recipe by id</a></li></ul></li><li><a href="#recipes-categories-2-recipes-2-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Delete recipe by id</a></li></ul></div></div><p style="text-align: center; word-wrap: break-word;"><a href="https://resapi.herokuapp.com/api">https://resapi.herokuapp.com/api</a></p></nav><div class="content"><div id="right-panel-background"></div><div class="middle"><header><h1 id="top">YUMMY RECIPES API DOCUMENTATION</h1></header></div><div class="right"><h5>API Endpoint</h5><a href="https://resapi.herokuapp.com/api">https://resapi.herokuapp.com/api</a></div><div class="middle"><p>Yummy recipes provides a platform for users to keep track of their awesome recipes and share with others if they so wish.</p>
-    <h2 id="header-authentication">Authentication <a class="permalink" href="#header-authentication" aria-hidden="true">¶</a></h2>
-    <p>This API uses OAuth v2 Bearer Token / Personal Access Token for its authentication.</p>
-    </div><div class="middle"><section id="users" class="resource-group"><h2 class="group-heading">Users <a href="#users" class="permalink">&para;</a></h2></section></div><div class="middle"><div id="users-users" class="resource"><h3 class="resource-heading">Users <a href="#users-users" class="permalink">&para;</a></h3></div></div><div class="right"><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users</span></div><div class="tabs"><div class="example-names"><span>Requests</span><span class="tab-button">example 1</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"Sylvance"</span></span>,
-      "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Sylvance"</span></span>,
-      "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Kerandi"</span></span>,
-      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"kerandisylvance@gmail.com"</span></span>,
-      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"starwars"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Yummy Recipes API Documentation</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');@import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700|Source+Code+Pro');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}.hljs-comment{color:#969896}.css .hljs-class,.css .hljs-id,.css .hljs-pseudo,.hljs-attribute,.hljs-regexp,.hljs-tag,.hljs-variable,.html .hljs-doctype,.ruby .hljs-constant,.xml .hljs-doctype,.xml .hljs-pi,.xml .hljs-tag .hljs-title{color:#77A619}.hljs-literal{color:#A69819}.hljs-built_in,.hljs-constant,.hljs-number,.hljs-params,.hljs-pragma,.hljs-preprocessor{color:#1B88B3}.css .hljs-rule .hljs-attribute,.ruby .hljs-class .hljs-title{color:#A37518}.hljs-header,.hljs-inheritance,.hljs-name,.hljs-string,.hljs-value,.ruby .hljs-symbol,.xml .hljs-cdata{color:inherit}.coffeescript .hljs-title,.css .hljs-hexcolor,.hljs-function,.hljs-title,.javascript .hljs-title,.perl .hljs-sub,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword{color:#A63A4A}.hljs-keyword,.javascript .hljs-function{color:#A69819}.hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .css,.xml .hljs-cdata,.xml .javascript,.xml .vbscript{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#C1EF65}.right .hljs-literal{color:#EBDE68}.right .hljs-built_in,.right .hljs-constant,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#77BCD7}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:inherit}.right .coffeescript .hljs-title,.right .css .hljs-hexcolor,.right .hljs-function,.right .hljs-title,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#f099a6}.right .hljs-keyword,.right .javascript .hljs-function{color:#EBDE68}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:#4c555a;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid transparent;margin-bottom:12px}h1,h2,h3,h4,h5{color:#292e31;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:100 36px 'Roboto',Helvetica,sans-serif;font-size:36px}h2{font:100 36px 'Roboto',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#0099e5;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(76,85,90,0) 20%, rgba(76,85,90,0.2) 48%, rgba(221,228,232,0.2) 48%, rgba(221,228,232,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(76,85,90,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:3px;overflow:auto}pre code{color:#4c555a;background-color:transparent;padding:0;border:none}code{color:#b93d6a;background-color:#f5f5f5;font:13px / 19.5px 'Source Code Pro',Menlo,monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:100 36px 'Roboto',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:#4c555a;background-color:#ebf7fd;border-left:4px solid #0099e5}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#0099e5}.warning{color:#4c555a;background-color:#faf0f4;border-left:4px solid #B82E5F}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#B82E5F}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:#4c555a;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:underline;background-color:transparent;border-left:2px solid transparent}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(76,85,90,0.7);padding:8px 12px;border-top:1px solid transparent;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:underline;background-color:transparent;border-left:2px solid transparent}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:black;background-color:transparent;border-radius:10px;margin:-2px -8px -2px 0}.badge.get{color:#fff;background-color:#ddf1fc}.badge.head{color:#fff;background-color:#ddf1fc}.badge.options{color:#fff;background-color:#ddf1fc}.badge.put{color:#fff;background-color:#f7f2c3}.badge.patch{color:#fff;background-color:#f7f2c3}.badge.post{color:#fff;background-color:#e4f2c8}.badge.delete{color:#fff;background-color:#f2d8e1}.collapse-button{float:right}.collapse-button .close{display:none;color:#0099e5;cursor:pointer}.collapse-button .open{color:#0099e5;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:15%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:15%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:48%;padding-right:12px}.right{box-sizing:border-box;float:right;width:52%;padding-left:12px}.right a{color:#0099e5}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:#dde4e8}.right pre{background-color:#272B2D;border:1px solid #272B2D}.right pre code{color:#D0D0D0}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#8ab82e}.definition .method.put{color:#b8aa2e}.definition .method.patch{color:#b8aa2e}.definition .method.delete{color:#b82e5f}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:3px}.example-names .tab-button{cursor:pointer;color:#4c555a;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#424648}.right .example-names .tab-button{color:#dde4e8;border:1px solid #6C6F71;border-radius:3px}.right .example-names .tab-button.active{background-color:#5a6063}#nav-background{position:fixed;left:0;top:0;bottom:0;width:15%;padding-right:14.4px;background-color:#fafcfc;border-right:1px solid #f0f4f7;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:52%;background-color:#2d3134;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:52%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(76,85,90,0.5);background-color:transparent;text-decoration:none !important;border-top:1px solid transparent;border-left:1px solid transparent;border-right:1px solid transparent;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px 12px 12px 0;margin-bottom:12px;background-color:transparent;border:1px solid transparent;border-radius:3px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px 12px 12px 0;margin:0 0 12px 0;background-color:transparent;border-bottom:1px solid transparent;border-top-left-radius:3px;border-top-right-radius:3px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid transparent}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:3px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:3px;border-top-right-radius:3px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:2px;display:inline-block}.action h4.action-heading .method.get{color:#fff;background-color:#0099e5}.action h4.action-heading .method.head{color:#fff;background-color:#0099e5}.action h4.action-heading .method.options{color:#fff;background-color:#0099e5}.action h4.action-heading .method.put{color:#fff;background-color:#b1a74e}.action h4.action-heading .method.patch{color:#fff;background-color:#b1a74e}.action h4.action-heading .method.post{color:#fff;background-color:#85a546}.action h4.action-heading .method.delete{color:#fff;background-color:#c14a74}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid transparent;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#ddf1fc}.action.get h4.action-heading{color:#0099e5;background:#ddf1fc;border-bottom-color:#ddf1fc}.action.head{border-color:#ddf1fc}.action.head h4.action-heading{color:#0099e5;background:#ddf1fc;border-bottom-color:#ddf1fc}.action.options{border-color:#ddf1fc}.action.options h4.action-heading{color:#0099e5;background:#ddf1fc;border-bottom-color:#ddf1fc}.action.post{border-color:#e4f2c8}.action.post h4.action-heading{color:#85a546;background:#e4f2c8;border-bottom-color:#e4f2c8}.action.put{border-color:#f7f2c3}.action.put h4.action-heading{color:#b1a74e;background:#f7f2c3;border-bottom-color:#f7f2c3}.action.patch{border-color:#f7f2c3}.action.patch h4.action-heading{color:#b1a74e;background:#f7f2c3;border-bottom-color:#f7f2c3}.action.delete{border-color:#f2d8e1}.action.delete h4.action-heading{color:#c14a74;background:#f2d8e1;border-bottom-color:#f2d8e1}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#top">Overview</a></div><div class="collapse-content"><ul><li><a href="#header-authentication">Authentication</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#users">Users</a></div><div class="collapse-content"><ul><li><a href="#users-users-post"><span class="badge post"><i class="fa fa-plus"></i></span>Sign up a user</a></li><li><a href="#users-user-sign-in-post"><span class="badge post"><i class="fa fa-plus"></i></span>Sign in a user</a></li><li><a href="#users-user-sign-out-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Sign out a user</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#categories">Categories</a></div><div class="collapse-content"><ul><li><a href="#categories-categories">Categories</a><ul><li><a href="#categories-categories-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>List all available categories</a></li><li><a href="#categories-categories-post"><span class="badge post"><i class="fa fa-plus"></i></span>Create a new category to the list.</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#recipes">Recipes</a></div><div class="collapse-content"><ul><li><a href="#recipes-recipes">Recipes</a><ul><li><a href="#recipes-recipes-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>List all available recipes</a></li><li><a href="#recipes-recipes-post"><span class="badge post"><i class="fa fa-plus"></i></span>Create a new recipe to the list.</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#single-category">Single Category</a></div><div class="collapse-content"><ul><li><a href="#single-category-single-category">Single Category</a><ul><li><a href="#single-category-single-category-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get a single category by id</a></li><li><a href="#single-category-single-category-post"><span class="badge post"><i class="fa fa-plus"></i></span>Update a single category by id</a></li><li><a href="#single-category-single-category-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Remove a single category by id</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#single-recipes">Single Recipes</a></div><div class="collapse-content"><ul><li><a href="#single-recipes-single-recipe">Single Recipe</a><ul><li><a href="#single-recipes-single-recipe-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get a single recipe by id</a></li><li><a href="#single-recipes-single-recipe-post"><span class="badge post"><i class="fa fa-plus"></i></span>Update a single recipe by id</a></li><li><a href="#single-recipes-single-recipe-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Remove a single recipe by id</a></li></ul></li></ul></div></div><p style="text-align: center; word-wrap: break-word;"><a href="https://resapi.herokuapp.com/api">https://resapi.herokuapp.com/api</a></p></nav><div class="content"><header><h1 id="top">Yummy Recipes API Documentation</h1></header><p>Yummy recipes provides a platform for users to keep track of their awesome recipes and share with others if they so wish. To test this API live on heroku follow this <a href="https://sylvance.docs.apiary.io/">link.</a></p>
+<h2 id="header-authentication">Authentication <a class="permalink" href="#header-authentication" aria-hidden="true">¶</a></h2>
+<p>This API uses OAuth v2 Bearer Token / Personal Access Token for its authentication.</p>
+<section id="users" class="resource-group"><h2 class="group-heading">Users <a href="#users" class="permalink">&para;</a></h2><div id="users-users" class="resource"><h3 class="resource-heading">Users <a href="#users-users" class="permalink">&nbsp;&para;</a></h3><div id="users-users-post" class="action post"><h4 class="action-heading"><div class="name">Sign up a user</div><a href="#users-users-post" class="method post">POST</a><code class="uri">/users</code></h4><p>Create a new User with [username, password, email, bio] fields. The username must not be a space. The password 6 characters long. All fields must be valid for their type.</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"Sylvance"</span></span>,
+  "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Sylvance"</span></span>,
+  "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Kerandi"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"kerandisylvance@gmail.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"starwars"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">first_name</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">last_name</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"username"</span>,
+    <span class="hljs-string">"first_name"</span>,
+    <span class="hljs-string">"last_name"</span>,
+    <span class="hljs-string">"email"</span>,
+    <span class="hljs-string">"password"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>201</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Successfully signed up"</span></span>,
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Success"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-string">"201"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to decode JSON object: Expecting property name enclosed in double quotes: line %s column %s (char %s)"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Fail"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-number">403</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Wrong email or password"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>409</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Fail"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-number">409</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"User already exists"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="users-user-sign-in" class="resource"><h3 class="resource-heading">User Sign In <a href="#users-user-sign-in" class="permalink">&nbsp;&para;</a></h3><div id="users-user-sign-in-post" class="action post"><h4 class="action-heading"><div class="name">Sign in a user</div><a href="#users-user-sign-in-post" class="method post">POST</a><code class="uri">/users/signin</code></h4><p>Sign in a new User with [email, password] fields. The username must not be a space(s). The password 6 characters long. All fields must be valid for their type.</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/signin</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"kerandisylvance@gmail.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"starwars"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"email"</span>,
+    <span class="hljs-string">"password"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Success"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"User has signed in."</span></span>,
+  "<span class="hljs-attribute">token</span>": <span class="hljs-value"><span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjAxNTc3NjcsImlhdCI6MTUxNzU2MjE2Nywic3ViIjoyfQ.Wtn-0s8KC7BNcF38cdbC2LNt1ZpQD0DkE-2Nfzub-rY"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to decode JSON object: Expecting property name enclosed in double quotes: line %s column %s (char %s)"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Fail"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-number">401</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"User does not exist or incorrect password."</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Fail"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-number">401</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Wrong email or password"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="users-user-sign-out" class="resource"><h3 class="resource-heading">User Sign Out <a href="#users-user-sign-out" class="permalink">&nbsp;&para;</a></h3><div id="users-user-sign-out-get" class="action get"><h4 class="action-heading"><div class="name">Sign out a user</div><a href="#users-user-sign-out-get" class="method get">GET</a><code class="uri">/users/signout</code></h4><p>Sign out a User with [email, password] fields. The username must not be a space(s). The password 6 characters long. All fields must be valid for their type.</p>
+<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/signout</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Success"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Successfully logged out"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to decode JSON object: Expecting property name enclosed in double quotes: line %s column %s (char %s)"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>405</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"The method is not allowed for the requested URL."</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="categories" class="resource-group"><h2 class="group-heading">Categories <a href="#categories" class="permalink">&para;</a></h2><div id="categories-categories" class="resource"><h3 class="resource-heading">Categories <a href="#categories-categories" class="permalink">&nbsp;&para;</a></h3><div id="categories-categories-get" class="action get"><h4 class="action-heading"><div class="name">List all available categories</div><a href="#categories-categories-get" class="method get">GET</a><code class="uri">/users/{id}/categories</code></h4><p>Get a list of all available categories. A user must be logged in to access this route. The response is in json format</p>
+<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/<span class="hljs-attribute" title="id">id</span>/categories</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for users id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">categorytitle</span>": <span class="hljs-value"><span class="hljs-string">"Kenyan Dishes"</span></span>,
+    "<span class="hljs-attribute">categorydescription</span>": <span class="hljs-value"><span class="hljs-string">"Dishes Made in Kenya"</span></span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Wed, 20 Dec 2017 17:28:54 -0000"</span></span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Wed, 20 Dec 2017 17:28:54 -0000"</span>
+  </span>},
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+    "<span class="hljs-attribute">categorytitle</span>": <span class="hljs-value"><span class="hljs-string">"Indian Dishes"</span></span>,
+    "<span class="hljs-attribute">categorydescription</span>": <span class="hljs-value"><span class="hljs-string">"Dishes Made in India"</span></span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Wed, 20 Dec 2017 17:29:24 -0000"</span></span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Wed, 20 Dec 2017 17:29:24 -0000"</span>
+  </span>},
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+    "<span class="hljs-attribute">categorytitle</span>": <span class="hljs-value"><span class="hljs-string">"Indiana Dishes"</span></span>,
+    "<span class="hljs-attribute">categorydescription</span>": <span class="hljs-value"><span class="hljs-string">"Dishes Made in Indiana"</span></span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Wed, 20 Dec 2017 23:18:48 -0000"</span></span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Wed, 20 Dec 2017 23:18:48 -0000"</span>
+  </span>},
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
+    "<span class="hljs-attribute">categorytitle</span>": <span class="hljs-value"><span class="hljs-string">"Indonesia Dishes"</span></span>,
+    "<span class="hljs-attribute">categorydescription</span>": <span class="hljs-value"><span class="hljs-string">"Dishes Made in Indonesia"</span></span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Wed, 20 Dec 2017 23:19:33 -0000"</span></span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Wed, 20 Dec 2017 23:19:33 -0000"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div><div id="categories-categories-post" class="action post"><h4 class="action-heading"><div class="name">Create a new category to the list.</div><a href="#categories-categories-post" class="method post">POST</a><code class="uri">/users/categories</code></h4><p>Create a new category to the list and respond with the newly created category. Category must not be existing for the current user.</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/categories</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Kenyan"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>201</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Kenyan"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:36:07 -0000"</span></span>,
+  "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:36:07 -0000"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"id"</span>,
+    <span class="hljs-string">"user_id"</span>,
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>,
+    <span class="hljs-string">"created_at"</span>,
+    <span class="hljs-string">"modified_at"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="recipes" class="resource-group"><h2 class="group-heading">Recipes <a href="#recipes" class="permalink">&para;</a></h2><div id="recipes-recipes" class="resource"><h3 class="resource-heading">Recipes <a href="#recipes-recipes" class="permalink">&nbsp;&para;</a></h3><div id="recipes-recipes-get" class="action get"><h4 class="action-heading"><div class="name">List all available recipes</div><a href="#recipes-recipes-get" class="method get">GET</a><code class="uri">/categories/{category_id}/recipes</code></h4><p>Get a list of all available recipes. A user must be logged in to access this route. The response is in json format</p>
+<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/<span class="hljs-attribute" title="category_id">category_id</span>/recipes</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>category_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for category id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">items</span>": <span class="hljs-value">[
+    <span class="hljs-string">"[]"</span>
+  ]</span>,
+  "<span class="hljs-attribute">meta</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">page</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">limit</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+    "<span class="hljs-attribute">total</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+    "<span class="hljs-attribute">pages</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+    "<span class="hljs-attribute">links</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">prev</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
+      "<span class="hljs-attribute">next</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
+      "<span class="hljs-attribute">first</span>": <span class="hljs-value"><span class="hljs-string">"/api/categories/2/recipes?page=1&amp;limit=3"</span></span>,
+      "<span class="hljs-attribute">last</span>": <span class="hljs-value"><span class="hljs-string">"/api/categories/2/recipes?page=0&amp;limit=3"</span>
+    </span>}
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">meta</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
       "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">username</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">first_name</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">last_name</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">password</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"username"</span>,
-        <span class="hljs-string">"first_name"</span>,
-        <span class="hljs-string">"last_name"</span>,
-        <span class="hljs-string">"email"</span>,
-        <span class="hljs-string">"password"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><div class="description text-muted">This response has no content.</div><div style="height: 1px;"></div></div></div></div></div></div></div></div><div class="middle"><div id="users-users-post" class="action post"><h4 class="action-heading"><div class="name">Sign up users</div><a href="#users-users-post" class="method post">POST</a><code class="uri">/users</code></h4><p>This will sign up a new user and save his/her details in the database.</p>
-    </div></div><hr class="split"><div class="middle"><div id="users-users-signin" class="resource"><h3 class="resource-heading">Users Signin <a href="#users-users-signin" class="permalink">&para;</a></h3></div></div><div class="right"><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/signin</span></div><div class="tabs"><div class="example-names"><span>Requests</span><span class="tab-button">example 1</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"kerandisylvance@gmail.com"</span></span>,
-      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"starwars"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">password</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"email"</span>,
-        <span class="hljs-string">"password"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><div class="description text-muted">This response has no content.</div><div style="height: 1px;"></div></div></div></div></div></div></div></div><div class="middle"><div id="users-users-signin-post" class="action post"><h4 class="action-heading"><div class="name">Sign in user</div><a href="#users-users-signin-post" class="method post">POST</a><code class="uri">/users/signin</code></h4><p>This will sign in a user and return a token as the response.</p>
-    </div></div><hr class="split"><div class="middle"><div id="users-users-signout" class="resource"><h3 class="resource-heading">Users Signout <a href="#users-users-signout" class="permalink">&para;</a></h3></div></div><div class="right"><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/signout</span></div><div class="tabs"><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><div class="description text-muted">This response has no content.</div><div style="height: 1px;"></div></div></div></div></div></div></div><div class="middle"><div id="users-users-signout-get" class="action get"><h4 class="action-heading"><div class="name">Sign out user</div><a href="#users-users-signout-get" class="method get">GET</a><code class="uri">/users/signout</code></h4><p>This will sign out a user when given an authentication token.</p>
-    </div></div><hr class="split"><div class="middle"><section id="categories" class="resource-group"><h2 class="group-heading">Categories <a href="#categories" class="permalink">&para;</a></h2></section></div><div class="middle"><div id="categories-users-1-categories" class="resource"><h3 class="resource-heading">Users 1 Categories <a href="#categories-users-1-categories" class="permalink">&para;</a></h3></div></div><div class="right"><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/1/categories</span></div><div class="tabs"><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><div class="description text-muted">This response has no content.</div><div style="height: 1px;"></div></div></div></div></div></div></div><div class="middle"><div id="categories-users-1-categories-get" class="action get"><h4 class="action-heading"><div class="name">Get all categories for a user</div><a href="#categories-users-1-categories-get" class="method get">GET</a><code class="uri">/users/1/categories</code></h4><p>This will get all categories that belong to a particular user.</p>
-    </div></div><hr class="split"><div class="right"><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/1/categories</span></div><div class="tabs"><div class="example-names"><span>Requests</span><span class="tab-button">example 1</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Kenyan"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">201</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Kenyan"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:36:07 -0000"</span></span>,
-      "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:36:07 -0000"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">page</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
         </span>}</span>,
-        "<span class="hljs-attribute">user_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">limit</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
         </span>}</span>,
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"id"</span>,
-        <span class="hljs-string">"user_id"</span>,
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>,
-        <span class="hljs-string">"created_at"</span>,
-        <span class="hljs-string">"modified_at"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div></div><div class="middle"><div id="categories-users-1-categories-post" class="action post"><h4 class="action-heading"><div class="name">Create a new category</div><a href="#categories-users-1-categories-post" class="method post">POST</a><code class="uri">/users/1/categories</code></h4><p>This will create a new category under the users account.</p>
-    </div></div><hr class="split"><div class="middle"><div id="categories-users-1-categories-1" class="resource"><h3 class="resource-heading">Users 1 Categories 1 <a href="#categories-users-1-categories-1" class="permalink">&para;</a></h3></div></div><div class="right"><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/1/categories/1</span></div><div class="tabs"><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Kenyan"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:21:30 -0000"</span></span>,
-      "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:21:30 -0000"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">total</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
         </span>}</span>,
-        "<span class="hljs-attribute">user_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">pages</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
         </span>}</span>,
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"id"</span>,
-        <span class="hljs-string">"user_id"</span>,
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>,
-        <span class="hljs-string">"created_at"</span>,
-        <span class="hljs-string">"modified_at"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div><div class="middle"><div id="categories-users-1-categories-1-get" class="action get"><h4 class="action-heading"><div class="name">Get category by id</div><a href="#categories-users-1-categories-1-get" class="method get">GET</a><code class="uri">/users/1/categories/1</code></h4><p>This will get a user’s category by its id.</p>
-    </div></div><hr class="split"><div class="right"><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/1/categories/1</span></div><div class="tabs"><div class="example-names"><span>Requests</span><span class="tab-button">example 1</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Tanzanian"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Tanzanian"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:21:30 -0000"</span></span>,
-      "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:31:41 -0000"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">user_id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"id"</span>,
-        <span class="hljs-string">"user_id"</span>,
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>,
-        <span class="hljs-string">"created_at"</span>,
-        <span class="hljs-string">"modified_at"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div></div><div class="middle"><div id="categories-users-1-categories-1-post" class="action post"><h4 class="action-heading"><div class="name">Update category by id</div><a href="#categories-users-1-categories-1-post" class="method post">POST</a><code class="uri">/users/1/categories/1</code></h4><p>This will update a category by its id. It will also update the modified timestamp</p>
-    </div></div><hr class="split"><div class="right"><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/1/categories/1</span></div><div class="tabs"><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">204</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Access-Control-Allow-Origin</span>: <span class="hljs-string">*</span><br><span class="hljs-attribute">Content-Length</span>: <span class="hljs-string">100</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-string">Mon, 29 Jan 2018 16:38:31 GMT</span><br><span class="hljs-attribute">Server</span>: <span class="hljs-string">Werkzeug/0.14.1 Python/3.6.4</span></code></pre><div style="height: 1px;"></div></div></div></div></div></div></div><div class="middle"><div id="categories-users-1-categories-1-delete" class="action delete"><h4 class="action-heading"><div class="name">Delete category by id</div><a href="#categories-users-1-categories-1-delete" class="method delete">DELETE</a><code class="uri">/users/1/categories/1</code></h4><p>This will delete a category by id for a particular user.</p>
-    </div></div><hr class="split"><div class="middle"><section id="recipes" class="resource-group"><h2 class="group-heading">Recipes <a href="#recipes" class="permalink">&para;</a></h2></section></div><div class="middle"><div id="recipes-categories-2-recipes" class="resource"><h3 class="resource-heading">Categories 2 Recipes <a href="#recipes-categories-2-recipes" class="permalink">&para;</a></h3></div></div><div class="right"><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/2/recipes</span></div><div class="tabs"><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">items</span>": <span class="hljs-value">[
-        <span class="hljs-string">"[]"</span>
-      ]</span>,
-      "<span class="hljs-attribute">meta</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">page</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-        "<span class="hljs-attribute">limit</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">total</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
-        "<span class="hljs-attribute">pages</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
         "<span class="hljs-attribute">links</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">prev</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
-          "<span class="hljs-attribute">next</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
-          "<span class="hljs-attribute">first</span>": <span class="hljs-value"><span class="hljs-string">"/api/categories/2/recipes?page=1&amp;limit=3"</span></span>,
-          "<span class="hljs-attribute">last</span>": <span class="hljs-value"><span class="hljs-string">"/api/categories/2/recipes?page=0&amp;limit=3"</span>
-        </span>}
-      </span>}
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">meta</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
           "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">page</span>": <span class="hljs-value">{
-              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-            </span>}</span>,
-            "<span class="hljs-attribute">limit</span>": <span class="hljs-value">{
-              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-            </span>}</span>,
-            "<span class="hljs-attribute">total</span>": <span class="hljs-value">{
-              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-            </span>}</span>,
-            "<span class="hljs-attribute">pages</span>": <span class="hljs-value">{
-              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-            </span>}</span>,
-            "<span class="hljs-attribute">links</span>": <span class="hljs-value">{
-              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-              "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">prev</span>": <span class="hljs-value">{
-                  "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
-                    <span class="hljs-string">"string"</span>,
-                    <span class="hljs-string">"null"</span>
-                  ]
-                </span>}</span>,
-                "<span class="hljs-attribute">next</span>": <span class="hljs-value">{
-                  "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
-                    <span class="hljs-string">"string"</span>,
-                    <span class="hljs-string">"null"</span>
-                  ]
-                </span>}</span>,
-                "<span class="hljs-attribute">first</span>": <span class="hljs-value">{
-                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-                </span>}</span>,
-                "<span class="hljs-attribute">last</span>": <span class="hljs-value">{
-                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-                </span>}
-              </span>}</span>,
-              "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-                <span class="hljs-string">"prev"</span>,
-                <span class="hljs-string">"next"</span>,
-                <span class="hljs-string">"first"</span>,
-                <span class="hljs-string">"last"</span>
+            "<span class="hljs-attribute">prev</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+                <span class="hljs-string">"string"</span>,
+                <span class="hljs-string">"null"</span>
               ]
+            </span>}</span>,
+            "<span class="hljs-attribute">next</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value">[
+                <span class="hljs-string">"string"</span>,
+                <span class="hljs-string">"null"</span>
+              ]
+            </span>}</span>,
+            "<span class="hljs-attribute">first</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">last</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
             </span>}
           </span>}</span>,
           "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-            <span class="hljs-string">"page"</span>,
-            <span class="hljs-string">"limit"</span>,
-            <span class="hljs-string">"total"</span>,
-            <span class="hljs-string">"pages"</span>,
-            <span class="hljs-string">"links"</span>
+            <span class="hljs-string">"prev"</span>,
+            <span class="hljs-string">"next"</span>,
+            <span class="hljs-string">"first"</span>,
+            <span class="hljs-string">"last"</span>
           ]
         </span>}
       </span>}</span>,
       "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"items"</span>,
-        <span class="hljs-string">"meta"</span>
+        <span class="hljs-string">"page"</span>,
+        <span class="hljs-string">"limit"</span>,
+        <span class="hljs-string">"total"</span>,
+        <span class="hljs-string">"pages"</span>,
+        <span class="hljs-string">"links"</span>
       ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div><div class="middle"><div id="recipes-categories-2-recipes-get" class="action get"><h4 class="action-heading"><div class="name">Get all recipes in a category</div><a href="#recipes-categories-2-recipes-get" class="method get">GET</a><code class="uri">/categories/2/recipes</code></h4><p>This will get all the recipes that belong to a category for a particular user.</p>
-    </div></div><hr class="split"><div class="right"><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/2/recipes</span></div><div class="tabs"><div class="example-names"><span>Requests</span><span class="tab-button">example 1</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">category_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"uji"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"white"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">category_id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"category_id"</span>,
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">201</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-      "<span class="hljs-attribute">category_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"uji"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"white"</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span></span>,
-      "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">category_id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"id"</span>,
-        <span class="hljs-string">"category_id"</span>,
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>,
-        <span class="hljs-string">"created_at"</span>,
-        <span class="hljs-string">"modified_at"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div></div><div class="middle"><div id="recipes-categories-2-recipes-post" class="action post"><h4 class="action-heading"><div class="name">Create a new recipe</div><a href="#recipes-categories-2-recipes-post" class="method post">POST</a><code class="uri">/categories/2/recipes</code></h4><p>This will create a new recipe for the category.</p>
-    </div></div><hr class="split"><div class="middle"><div id="recipes-categories-2-recipes-3" class="resource"><h3 class="resource-heading">Categories 2 Recipes 3 <a href="#recipes-categories-2-recipes-3" class="permalink">&para;</a></h3></div></div><div class="right"><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/2/recipes/3</span></div><div class="tabs"><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-      "<span class="hljs-attribute">category_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"uji"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"white"</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span></span>,
-      "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">category_id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"id"</span>,
-        <span class="hljs-string">"category_id"</span>,
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>,
-        <span class="hljs-string">"created_at"</span>,
-        <span class="hljs-string">"modified_at"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div><div class="middle"><div id="recipes-categories-2-recipes-3-get" class="action get"><h4 class="action-heading"><div class="name">Get recipe by id</div><a href="#recipes-categories-2-recipes-3-get" class="method get">GET</a><code class="uri">/categories/2/recipes/3</code></h4><p>This will get your recipe by the id for the containing category for a particular user.</p>
-    </div></div><hr class="split"><div class="right"><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/2/recipes/3</span></div><div class="tabs"><div class="example-names"><span>Requests</span><span class="tab-button">example 1</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"porridge"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"brown"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">200</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-      "<span class="hljs-attribute">category_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"porridge"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"brown"</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span></span>,
-      "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 20:00:43 -0000"</span>
-    </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-      "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">category_id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}
-      </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"id"</span>,
-        <span class="hljs-string">"category_id"</span>,
-        <span class="hljs-string">"title"</span>,
-        <span class="hljs-string">"description"</span>,
-        <span class="hljs-string">"created_at"</span>,
-        <span class="hljs-string">"modified_at"</span>
-      ]
-    </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></div></div></div><div class="middle"><div id="recipes-categories-2-recipes-3-post" class="action post"><h4 class="action-heading"><div class="name">Update recipe by id</div><a href="#recipes-categories-2-recipes-3-post" class="method post">POST</a><code class="uri">/categories/2/recipes/3</code></h4><p>This will update your recipe by id for a particular user in its containing category.</p>
-    </div></div><hr class="split"><div class="middle"><div id="recipes-categories-2-recipes-2" class="resource"><h3 class="resource-heading">Categories 2 Recipes 2 <a href="#recipes-categories-2-recipes-2" class="permalink">&para;</a></h3></div></div><div class="right"><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/2/recipes/2</span></div><div class="tabs"><div class="tabs"><div class="example-names"><span>Responses</span><span class="tab-button">204</span></div><div class="tab"><div><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Access-Control-Allow-Origin</span>: <span class="hljs-string">*</span><br><span class="hljs-attribute">Content-Length</span>: <span class="hljs-string">98</span><br><span class="hljs-attribute">Date</span>: <span class="hljs-string">Mon, 29 Jan 2018 17:04:29 GMT</span><br><span class="hljs-attribute">Server</span>: <span class="hljs-string">Werkzeug/0.14.1 Python/3.6.4</span></code></pre><div style="height: 1px;"></div></div></div></div></div></div></div><div class="middle"><div id="recipes-categories-2-recipes-2-delete" class="action delete"><h4 class="action-heading"><div class="name">Delete recipe by id</div><a href="#recipes-categories-2-recipes-2-delete" class="method delete">DELETE</a><code class="uri">/categories/2/recipes/2</code></h4><p>This will delete a recipe by id for a particular user in its containing category</p>
-    </div></div><hr class="split"><div class="middle"><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 30 Jan 2018</p></div></div></div></div><script>/* eslint-env browser */
-    /* eslint quotes: [2, "single"] */
-    'use strict';
-    
-    /*
-      Determine if a string ends with another string.
-    */
-    function endsWith(str, suffix) {
-        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"items"</span>,
+    <span class="hljs-string">"meta"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="recipes-recipes-post" class="action post"><h4 class="action-heading"><div class="name">Create a new recipe to the list.</div><a href="#recipes-recipes-post" class="method post">POST</a><code class="uri">/categories/{category_id}/recipes</code></h4><p>Create a new recipe to the list and respond with the newly created recipe. Recipe must not be existing for the current category.</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/<span class="hljs-attribute" title="category_id">category_id</span>/recipes</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>category_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for category id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">category_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"uji"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"white"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">category_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"category_id"</span>,
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>201</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+  "<span class="hljs-attribute">category_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"uji"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"white"</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span></span>,
+  "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">category_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"id"</span>,
+    <span class="hljs-string">"category_id"</span>,
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>,
+    <span class="hljs-string">"created_at"</span>,
+    <span class="hljs-string">"modified_at"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="single-category" class="resource-group"><h2 class="group-heading">Single Category <a href="#single-category" class="permalink">&para;</a></h2><div id="single-category-single-category" class="resource"><h3 class="resource-heading">Single Category <a href="#single-category-single-category" class="permalink">&nbsp;&para;</a></h3><div id="single-category-single-category-get" class="action get"><h4 class="action-heading"><div class="name">Get a single category by id</div><a href="#single-category-single-category-get" class="method get">GET</a><code class="uri">/users/{user_id}/categories/{category_id}</code></h4><p>Get a single category. A user must be logged in to access this route. The response is in json format</p>
+<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/<span class="hljs-attribute" title="user_id">user_id</span>/categories/<span class="hljs-attribute" title="category_id">category_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for user id that is required for a valid URL</p>
+</dd><dt>category_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for category id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Kenyan"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:21:30 -0000"</span></span>,
+  "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:21:30 -0000"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"id"</span>,
+    <span class="hljs-string">"user_id"</span>,
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>,
+    <span class="hljs-string">"created_at"</span>,
+    <span class="hljs-string">"modified_at"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="single-category-single-category-post" class="action post"><h4 class="action-heading"><div class="name">Update a single category by id</div><a href="#single-category-single-category-post" class="method post">POST</a><code class="uri">/users/{user_id}/categories/{category_id}</code></h4><p>Update a single category. A user must be logged in to access this route. The response is in json format</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/<span class="hljs-attribute" title="user_id">user_id</span>/categories/<span class="hljs-attribute" title="category_id">category_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for user id that is required for a valid URL</p>
+</dd><dt>category_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for category id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Tanzanian"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Tanzanian"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Dishes"</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:21:30 -0000"</span></span>,
+  "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:31:41 -0000"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"id"</span>,
+    <span class="hljs-string">"user_id"</span>,
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>,
+    <span class="hljs-string">"created_at"</span>,
+    <span class="hljs-string">"modified_at"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="single-category-single-category-delete" class="action delete"><h4 class="action-heading"><div class="name">Remove a single category by id</div><a href="#single-category-single-category-delete" class="method delete">DELETE</a><code class="uri">/users/{user_id}/categories/{category_id}</code></h4><p>Remove a single category. A user must be logged in to access this route. The response is in json format</p>
+<h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/users/<span class="hljs-attribute" title="user_id">user_id</span>/categories/<span class="hljs-attribute" title="category_id">category_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for user id that is required for a valid URL</p>
+</dd><dt>category_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for category id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Delete category success"</span></span>,
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Success"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-string">"200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="single-recipes" class="resource-group"><h2 class="group-heading">Single Recipes <a href="#single-recipes" class="permalink">&para;</a></h2><div id="single-recipes-single-recipe" class="resource"><h3 class="resource-heading">Single Recipe <a href="#single-recipes-single-recipe" class="permalink">&nbsp;&para;</a></h3><div id="single-recipes-single-recipe-get" class="action get"><h4 class="action-heading"><div class="name">Get a single recipe by id</div><a href="#single-recipes-single-recipe-get" class="method get">GET</a><code class="uri">/categories/{category_id}/recipes/{recipe_id}</code></h4><p>Get a single recipe. A user must be logged in to access this route. The response is in json format</p>
+<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/<span class="hljs-attribute" title="category_id">category_id</span>/recipes/<span class="hljs-attribute" title="recipe_id">recipe_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>category_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for category id that is required for a valid URL</p>
+</dd><dt>recipe_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for recipe id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+  "<span class="hljs-attribute">category_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"uji"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"white"</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span></span>,
+  "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">category_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"id"</span>,
+    <span class="hljs-string">"category_id"</span>,
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>,
+    <span class="hljs-string">"created_at"</span>,
+    <span class="hljs-string">"modified_at"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="single-recipes-single-recipe-post" class="action post"><h4 class="action-heading"><div class="name">Update a single recipe by id</div><a href="#single-recipes-single-recipe-post" class="method post">POST</a><code class="uri">/categories/{category_id}/recipes/{recipe_id}</code></h4><p>Update a single recipe. A user must be logged in to access this route. The response is in json format</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/<span class="hljs-attribute" title="category_id">category_id</span>/recipes/<span class="hljs-attribute" title="recipe_id">recipe_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>category_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for category id that is required for a valid URL</p>
+</dd><dt>recipe_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for recipe id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"porridge"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"brown"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+  "<span class="hljs-attribute">category_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+  "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"porridge"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"brown"</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 19:52:49 -0000"</span></span>,
+  "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value"><span class="hljs-string">"Mon, 29 Jan 2018 20:00:43 -0000"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">category_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">modified_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"id"</span>,
+    <span class="hljs-string">"category_id"</span>,
+    <span class="hljs-string">"title"</span>,
+    <span class="hljs-string">"description"</span>,
+    <span class="hljs-string">"created_at"</span>,
+    <span class="hljs-string">"modified_at"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="single-recipes-single-recipe-delete" class="action delete"><h4 class="action-heading"><div class="name">Remove a single recipe by id</div><a href="#single-recipes-single-recipe-delete" class="method delete">DELETE</a><code class="uri">/categories/{category_id}/recipes/{recipe_id}</code></h4><p>Remove a single recipe. A user must be logged in to access this route. The response is in json format</p>
+<h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname">https://resapi.herokuapp.com/api</span>/categories/<span class="hljs-attribute" title="category_id">category_id</span>/recipes/<span class="hljs-attribute" title="recipe_id">recipe_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>category_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for category id that is required for a valid URL</p>
+</dd><dt>recipe_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<p>A path variable for recipe id that is required for a valid URL</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer JWT Token</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>201</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Delete recipe success"</span></span>,
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"Success"</span></span>,
+  "<span class="hljs-attribute">status code</span>": <span class="hljs-value"><span class="hljs-string">"201"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 02 Feb 2018</p><script>/* eslint-env browser */
+/* eslint quotes: [2, "single"] */
+'use strict';
+
+/*
+  Determine if a string ends with another string.
+*/
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+/*
+  Get a list of direct child elements by class name.
+*/
+function childrenByClass(element, name) {
+  var filtered = [];
+
+  for (var i = 0; i < element.children.length; i++) {
+    var child = element.children[i];
+    var classNames = child.className.split(' ');
+    if (classNames.indexOf(name) !== -1) {
+      filtered.push(child);
     }
-    
-    /*
-      Get a list of direct child elements by class name.
-    */
-    function childrenByClass(element, name) {
-      var filtered = [];
-    
-      for (var i = 0; i < element.children.length; i++) {
-        var child = element.children[i];
-        var classNames = child.className.split(' ');
-        if (classNames.indexOf(name) !== -1) {
-          filtered.push(child);
-        }
-      }
-    
-      return filtered;
+  }
+
+  return filtered;
+}
+
+/*
+  Get an array [width, height] of the window.
+*/
+function getWindowDimensions() {
+  var w = window,
+      d = document,
+      e = d.documentElement,
+      g = d.body,
+      x = w.innerWidth || e.clientWidth || g.clientWidth,
+      y = w.innerHeight || e.clientHeight || g.clientHeight;
+
+  return [x, y];
+}
+
+/*
+  Collapse or show a request/response example.
+*/
+function toggleCollapseButton(event) {
+    var button = event.target.parentNode;
+    var content = button.parentNode.nextSibling;
+    var inner = content.children[0];
+
+    if (button.className.indexOf('collapse-button') === -1) {
+      // Clicked without hitting the right element?
+      return;
     }
-    
-    /*
-      Get an array [width, height] of the window.
-    */
-    function getWindowDimensions() {
-      var w = window,
-          d = document,
-          e = d.documentElement,
-          g = d.body,
-          x = w.innerWidth || e.clientWidth || g.clientWidth,
-          y = w.innerHeight || e.clientHeight || g.clientHeight;
-    
-      return [x, y];
+
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        // Currently showing, so let's hide it
+        button.className = 'collapse-button';
+        content.style.maxHeight = '0px';
+    } else {
+        // Currently hidden, so let's show it
+        button.className = 'collapse-button show';
+        content.style.maxHeight = inner.offsetHeight + 12 + 'px';
     }
-    
-    /*
-      Collapse or show a request/response example.
-    */
-    function toggleCollapseButton(event) {
-        var button = event.target.parentNode;
-        var content = button.parentNode.nextSibling;
-        var inner = content.children[0];
-    
-        if (button.className.indexOf('collapse-button') === -1) {
-          // Clicked without hitting the right element?
-          return;
-        }
-    
-        if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-            // Currently showing, so let's hide it
-            button.className = 'collapse-button';
-            content.style.maxHeight = '0px';
+}
+
+function toggleTabButton(event) {
+    var i, index;
+    var button = event.target;
+
+    // Get index of the current button.
+    var buttons = childrenByClass(button.parentNode, 'tab-button');
+    for (i = 0; i < buttons.length; i++) {
+        if (buttons[i] === button) {
+            index = i;
+            button.className = 'tab-button active';
         } else {
-            // Currently hidden, so let's show it
-            button.className = 'collapse-button show';
-            content.style.maxHeight = inner.offsetHeight + 12 + 'px';
+            buttons[i].className = 'tab-button';
         }
     }
-    
-    function toggleTabButton(event) {
-        var i, index;
-        var button = event.target;
-    
-        // Get index of the current button.
-        var buttons = childrenByClass(button.parentNode, 'tab-button');
-        for (i = 0; i < buttons.length; i++) {
-            if (buttons[i] === button) {
-                index = i;
-                button.className = 'tab-button active';
-            } else {
-                buttons[i].className = 'tab-button';
-            }
-        }
-    
-        // Hide other tabs and show this one.
-        var tabs = childrenByClass(button.parentNode.parentNode, 'tab');
-        for (i = 0; i < tabs.length; i++) {
-            if (i === index) {
-                tabs[i].style.display = 'block';
-            } else {
-                tabs[i].style.display = 'none';
-            }
-        }
-    }
-    
-    /*
-      Collapse or show a navigation menu. It will not be hidden unless it
-      is currently selected or `force` has been passed.
-    */
-    function toggleCollapseNav(event, force) {
-        var heading = event.target.parentNode;
-        var content = heading.nextSibling;
-        var inner = content.children[0];
-    
-        if (heading.className.indexOf('heading') === -1) {
-          // Clicked without hitting the right element?
-          return;
-        }
-    
-        if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-          // Currently showing, so let's hide it, but only if this nav item
-          // is already selected. This prevents newly selected items from
-          // collapsing in an annoying fashion.
-          if (force || window.location.hash && endsWith(event.target.href, window.location.hash)) {
-            content.style.maxHeight = '0px';
-          }
+
+    // Hide other tabs and show this one.
+    var tabs = childrenByClass(button.parentNode.parentNode, 'tab');
+    for (i = 0; i < tabs.length; i++) {
+        if (i === index) {
+            tabs[i].style.display = 'block';
         } else {
-          // Currently hidden, so let's show it
-          content.style.maxHeight = inner.offsetHeight + 12 + 'px';
+            tabs[i].style.display = 'none';
         }
     }
-    
-    /*
-      Refresh the page after a live update from the server. This only
-      works in live preview mode (using the `--server` parameter).
-    */
-    function refresh(body) {
-        document.querySelector('body').className = 'preload';
-        document.body.innerHTML = body;
-    
-        // Re-initialize the page
-        init();
-        autoCollapse();
-    
-        document.querySelector('body').className = '';
+}
+
+/*
+  Collapse or show a navigation menu. It will not be hidden unless it
+  is currently selected or `force` has been passed.
+*/
+function toggleCollapseNav(event, force) {
+    var heading = event.target.parentNode;
+    var content = heading.nextSibling;
+    var inner = content.children[0];
+
+    if (heading.className.indexOf('heading') === -1) {
+      // Clicked without hitting the right element?
+      return;
     }
-    
-    /*
-      Determine which navigation items should be auto-collapsed to show as many
-      as possible on the screen, based on the current window height. This also
-      collapses them.
-    */
-    function autoCollapse() {
-      var windowHeight = getWindowDimensions()[1];
-      var itemsHeight = 64; /* Account for some padding */
-      var itemsArray = Array.prototype.slice.call(
-        document.querySelectorAll('nav .resource-group .heading'));
-    
-      // Get the total height of the navigation items
-      itemsArray.forEach(function (item) {
-        itemsHeight += item.parentNode.offsetHeight;
-      });
-    
-      // Should we auto-collapse any nav items? Try to find the smallest item
-      // that can be collapsed to show all items on the screen. If not possible,
-      // then collapse the largest item and do it again. First, sort the items
-      // by height from smallest to largest.
-      var sortedItems = itemsArray.sort(function (a, b) {
-        return a.parentNode.offsetHeight - b.parentNode.offsetHeight;
-      });
-    
-      while (sortedItems.length && itemsHeight > windowHeight) {
-        for (var i = 0; i < sortedItems.length; i++) {
-          // Will collapsing this item help?
-          var itemHeight = sortedItems[i].nextSibling.offsetHeight;
-          if ((itemsHeight - itemHeight <= windowHeight) || i === sortedItems.length - 1) {
-            // It will, so let's collapse it, remove its content height from
-            // our total and then remove it from our list of candidates
-            // that can be collapsed.
-            itemsHeight -= itemHeight;
-            toggleCollapseNav({target: sortedItems[i].children[0]}, true);
-            sortedItems.splice(i, 1);
-            break;
-          }
-        }
+
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+      // Currently showing, so let's hide it, but only if this nav item
+      // is already selected. This prevents newly selected items from
+      // collapsing in an annoying fashion.
+      if (force || window.location.hash && endsWith(event.target.href, window.location.hash)) {
+        content.style.maxHeight = '0px';
       }
+    } else {
+      // Currently hidden, so let's show it
+      content.style.maxHeight = inner.offsetHeight + 12 + 'px';
     }
-    
-    /*
-      Initialize the interactive functionality of the page.
-    */
-    function init() {
-        var i, j;
-    
-        // Make collapse buttons clickable
-        var buttons = document.querySelectorAll('.collapse-button');
-        for (i = 0; i < buttons.length; i++) {
-            buttons[i].onclick = toggleCollapseButton;
-    
-            // Show by default? Then toggle now.
-            if (buttons[i].className.indexOf('show') !== -1) {
-                toggleCollapseButton({target: buttons[i].children[0]});
-            }
-        }
-    
-        var responseCodes = document.querySelectorAll('.example-names');
-        for (i = 0; i < responseCodes.length; i++) {
-            var tabButtons = childrenByClass(responseCodes[i], 'tab-button');
-            for (j = 0; j < tabButtons.length; j++) {
-                tabButtons[j].onclick = toggleTabButton;
-    
-                // Show by default?
-                if (j === 0) {
-                    toggleTabButton({target: tabButtons[j]});
-                }
-            }
-        }
-    
-        // Make nav items clickable to collapse/expand their content.
-        var navItems = document.querySelectorAll('nav .resource-group .heading');
-        for (i = 0; i < navItems.length; i++) {
-            navItems[i].onclick = toggleCollapseNav;
-    
-            // Show all by default
-            toggleCollapseNav({target: navItems[i].children[0]});
-        }
-    }
-    
-    // Initial call to set up buttons
+}
+
+/*
+  Refresh the page after a live update from the server. This only
+  works in live preview mode (using the `--server` parameter).
+*/
+function refresh(body) {
+    document.querySelector('body').className = 'preload';
+    document.body.innerHTML = body;
+
+    // Re-initialize the page
     init();
-    
-    window.onload = function () {
-        autoCollapse();
-        // Remove the `preload` class to enable animations
-        document.querySelector('body').className = '';
-    };
-    </script></body></html>
+    autoCollapse();
+
+    document.querySelector('body').className = '';
+}
+
+/*
+  Determine which navigation items should be auto-collapsed to show as many
+  as possible on the screen, based on the current window height. This also
+  collapses them.
+*/
+function autoCollapse() {
+  var windowHeight = getWindowDimensions()[1];
+  var itemsHeight = 64; /* Account for some padding */
+  var itemsArray = Array.prototype.slice.call(
+    document.querySelectorAll('nav .resource-group .heading'));
+
+  // Get the total height of the navigation items
+  itemsArray.forEach(function (item) {
+    itemsHeight += item.parentNode.offsetHeight;
+  });
+
+  // Should we auto-collapse any nav items? Try to find the smallest item
+  // that can be collapsed to show all items on the screen. If not possible,
+  // then collapse the largest item and do it again. First, sort the items
+  // by height from smallest to largest.
+  var sortedItems = itemsArray.sort(function (a, b) {
+    return a.parentNode.offsetHeight - b.parentNode.offsetHeight;
+  });
+
+  while (sortedItems.length && itemsHeight > windowHeight) {
+    for (var i = 0; i < sortedItems.length; i++) {
+      // Will collapsing this item help?
+      var itemHeight = sortedItems[i].nextSibling.offsetHeight;
+      if ((itemsHeight - itemHeight <= windowHeight) || i === sortedItems.length - 1) {
+        // It will, so let's collapse it, remove its content height from
+        // our total and then remove it from our list of candidates
+        // that can be collapsed.
+        itemsHeight -= itemHeight;
+        toggleCollapseNav({target: sortedItems[i].children[0]}, true);
+        sortedItems.splice(i, 1);
+        break;
+      }
+    }
+  }
+}
+
+/*
+  Initialize the interactive functionality of the page.
+*/
+function init() {
+    var i, j;
+
+    // Make collapse buttons clickable
+    var buttons = document.querySelectorAll('.collapse-button');
+    for (i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = toggleCollapseButton;
+
+        // Show by default? Then toggle now.
+        if (buttons[i].className.indexOf('show') !== -1) {
+            toggleCollapseButton({target: buttons[i].children[0]});
+        }
+    }
+
+    var responseCodes = document.querySelectorAll('.example-names');
+    for (i = 0; i < responseCodes.length; i++) {
+        var tabButtons = childrenByClass(responseCodes[i], 'tab-button');
+        for (j = 0; j < tabButtons.length; j++) {
+            tabButtons[j].onclick = toggleTabButton;
+
+            // Show by default?
+            if (j === 0) {
+                toggleTabButton({target: tabButtons[j]});
+            }
+        }
+    }
+
+    // Make nav items clickable to collapse/expand their content.
+    var navItems = document.querySelectorAll('nav .resource-group .heading');
+    for (i = 0; i < navItems.length; i++) {
+        navItems[i].onclick = toggleCollapseNav;
+
+        // Show all by default
+        toggleCollapseNav({target: navItems[i].children[0]});
+    }
+}
+
+// Initial call to set up buttons
+init();
+
+window.onload = function () {
+    autoCollapse();
+    // Remove the `preload` class to enable animations
+    document.querySelector('body').className = '';
+};
+</script></body></html>
