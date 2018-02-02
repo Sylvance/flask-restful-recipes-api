@@ -97,7 +97,7 @@ All URIs are relative to *https://resapi.herokuapp.com/api*
 
 |---| Endpoint | Description|
 |---|---|---|
-|---| **GET** /users/{id}/categories | List all available categories
+|---| **GET** /users/`{id}`/categories | List all available categories
 |---| **POST** /users/{id}/categories | Create a new category to the list.
 |---| **GET** /categories/{id}/recipes | List all available recipes
 |---| **POST** /categories/{id}/recipes | Create a new recipe to the list.
