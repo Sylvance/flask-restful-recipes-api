@@ -98,15 +98,15 @@ All URIs are relative to *https://resapi.herokuapp.com/api*
 |---| Endpoint | Description|
 |---|---|---|
 |---| **GET** /users/`{id}`/categories | List all available categories
-|---| **POST** /users/{id}/categories | Create a new category to the list.
-|---| **GET** /categories/{id}/recipes | List all available recipes
-|---| **POST** /categories/{id}/recipes | Create a new recipe to the list.
-|---| **DELETE** /users/{user_id}/categories/{category_id} | Remove a single category by id
-|---| **GET** /users/{user_id}/categories/{category_id} | Get a single category by id
-|---| **POST** /users/{user_id}/categories/{category_id} | Update a single category by id
-|---| **DELETE** /categories/{category_id}/recipes/{recipe_id} | Remove a single recipe by id
-|---| **GET** /categories/{category_id}/recipes/{recipe_id} | Get a single recipe by id
-|---| **POST** /categories/{category_id}/recipes/{recipe_id} | Update a single recipe by id
+|---| **POST** /users/`{id}`/categories | Create a new category to the list.
+|---| **GET** /categories/`{id}`/recipes | List all available recipes
+|---| **POST** /categories/`{id}`/recipes | Create a new recipe to the list.
+|---| **DELETE** /users/`{user_id}`/categories/`{category_id}` | Remove a single category by id
+|---| **GET** /users/`{user_id}`/categories/`{category_id}` | Get a single category by id
+|---| **POST** /users/`{user_id}`/categories/`{category_id}` | Update a single category by id
+|---| **DELETE** /categories/`{category_id}`/recipes/`{recipe_id}` | Remove a single recipe by id
+|---| **GET** /categories/`{category_id}`/recipes/`{recipe_id}` | Get a single recipe by id
+|---| **POST** /categories/`{category_id}`/recipes/`{recipe_id}` | Update a single recipe by id
 |---| **POST** /users | Sign up a user
 |---| **POST** /users/signin | Sign in a user
 |---| **GET** /users/signout | Sign out a user
