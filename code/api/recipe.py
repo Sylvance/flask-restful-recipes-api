@@ -7,7 +7,7 @@ from code.api import api, meta_fields
 from code.api.auth import self_only, token_required, ensure_auth_header
 from code.models.recipe import Recipe
 from code.models.category import Category
-from code.helpers import paginate, abort_if_exists
+from code.helpers import paginate, abort_if_exists, validate_json
 
 def valid_str(value, name):
     if ' ' in value:
@@ -59,6 +59,7 @@ class RecipeResource(Resource):
     @ensure_auth_header
     @token_required
     @self_only
+    @validate_json
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, recipe_id=0, **kwargs):
         args = recipe_parser.parse_args()
@@ -121,6 +122,7 @@ class RecipeCollectionResource(Resource):
     @ensure_auth_header
     @token_required
     @self_only
+    @validate_json
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, title=None):
         args = recipe_parser.parse_args()

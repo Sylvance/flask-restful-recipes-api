@@ -91,27 +91,23 @@ To build a tree structure diagram in windows run this command;
 Resources
 ---------
 
-| Col A | Col B | Col C|
-|---|---|---|
-| A1 | B1 | C1 |
-| A2 |  | :smile: |
-
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://resapi.herokuapp.com/api*
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*YummyRecipesApiDocumentation.CategoriesApi* | [**usersCategoriesByIdGet**](docs/CategoriesApi.md#usersCategoriesByIdGet) | **GET** /users/{id}/categories | List all available categories
-*YummyRecipesApiDocumentation.CategoriesApi* | [**usersCategoriesByIdPost**](docs/CategoriesApi.md#usersCategoriesByIdPost) | **POST** /users/{id}/categories | Create a new category to the list.
-*YummyRecipesApiDocumentation.RecipesApi* | [**categoriesRecipesByIdGet**](docs/RecipesApi.md#categoriesRecipesByIdGet) | **GET** /categories/{id}/recipes | List all available recipes
-*YummyRecipesApiDocumentation.RecipesApi* | [**categoriesRecipesByIdPost**](docs/RecipesApi.md#categoriesRecipesByIdPost) | **POST** /categories/{id}/recipes | Create a new recipe to the list.
-*YummyRecipesApiDocumentation.SingleCategoryApi* | [**usersCategoriesByUserIdAndCategoryIdDelete**](docs/SingleCategoryApi.md#usersCategoriesByUserIdAndCategoryIdDelete) | **DELETE** /users/{user_id}/categories/{category_id} | Remove a single category by id
-*YummyRecipesApiDocumentation.SingleCategoryApi* | [**usersCategoriesByUserIdAndCategoryIdGet**](docs/SingleCategoryApi.md#usersCategoriesByUserIdAndCategoryIdGet) | **GET** /users/{user_id}/categories/{category_id} | Get a single category by id
-*YummyRecipesApiDocumentation.SingleCategoryApi* | [**usersCategoriesByUserIdAndCategoryIdPost**](docs/SingleCategoryApi.md#usersCategoriesByUserIdAndCategoryIdPost) | **POST** /users/{user_id}/categories/{category_id} | Update a single category by id
-*YummyRecipesApiDocumentation.SingleRecipesApi* | [**categoriesRecipesByCategoryIdAndRecipeIdDelete**](docs/SingleRecipesApi.md#categoriesRecipesByCategoryIdAndRecipeIdDelete) | **DELETE** /categories/{category_id}/recipes/{recipe_id} | Remove a single recipe by id
-*YummyRecipesApiDocumentation.SingleRecipesApi* | [**categoriesRecipesByCategoryIdAndRecipeIdGet**](docs/SingleRecipesApi.md#categoriesRecipesByCategoryIdAndRecipeIdGet) | **GET** /categories/{category_id}/recipes/{recipe_id} | Get a single recipe by id
-*YummyRecipesApiDocumentation.SingleRecipesApi* | [**categoriesRecipesByCategoryIdAndRecipeIdPost**](docs/SingleRecipesApi.md#categoriesRecipesByCategoryIdAndRecipeIdPost) | **POST** /categories/{category_id}/recipes/{recipe_id} | Update a single recipe by id
-*YummyRecipesApiDocumentation.UsersApi* | [**usersPost**](docs/UsersApi.md#usersPost) | **POST** /users | Sign up a user
-*YummyRecipesApiDocumentation.UsersApi* | [**usersSigninPost**](docs/UsersApi.md#usersSigninPost) | **POST** /users/signin | Sign in a user
-*YummyRecipesApiDocumentation.UsersApi* | [**usersSignoutGet**](docs/UsersApi.md#usersSignoutGet) | **GET** /users/signout | Sign out a user
+|---| Endpoint | Description|
+|---|---|---|
+|---| **GET** /users/{id}/categories | List all available categories
+|---| **POST** /users/{id}/categories | Create a new category to the list.
+|---| **GET** /categories/{id}/recipes | List all available recipes
+|---| **POST** /categories/{id}/recipes | Create a new recipe to the list.
+|---| **DELETE** /users/{user_id}/categories/{category_id} | Remove a single category by id
+|---| **GET** /users/{user_id}/categories/{category_id} | Get a single category by id
+|---| **POST** /users/{user_id}/categories/{category_id} | Update a single category by id
+|---| **DELETE** /categories/{category_id}/recipes/{recipe_id} | Remove a single recipe by id
+|---| **GET** /categories/{category_id}/recipes/{recipe_id} | Get a single recipe by id
+|---| **POST** /categories/{category_id}/recipes/{recipe_id} | Update a single recipe by id
+|---| **POST** /users | Sign up a user
+|---| **POST** /users/signin | Sign in a user
+|---| **GET** /users/signout | Sign out a user
+| A2 |  | :smile: |
