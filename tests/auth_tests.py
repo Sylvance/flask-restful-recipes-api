@@ -235,6 +235,22 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users/signout",
                                     headers=dict(Authorization='Bearer' + self.token))
         self.assertEqual(response.status_code, 403)
+    
+    def test_get_404(self):
+        """ 
+        """
+        response = self.tester.get('/brew',
+                                    headers=dict(Authorization='Bearer ' + self.token), 
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 404)
+    
+    def test_get_index(self):
+        """ 
+        """
+        response = self.tester.get('/',
+                                    headers=dict(Authorization='Bearer ' + self.token), 
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
 
 
 if __name__ == "__main__":
