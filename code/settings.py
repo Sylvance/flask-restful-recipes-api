@@ -11,10 +11,6 @@ class Config(object):
     ERROR_404_HELP = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    MAIL_SERVER='smtp.gmail.com',
-	MAIL_PORT=465,
-	MAIL_USE_SSL=True
-
     SECRET_KEY = os.getenv('SECRET_KEY', 'xoi82SJuX98#*$aIAjakj3sus')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql:///recipesdemo')
 
