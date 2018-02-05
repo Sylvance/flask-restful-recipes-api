@@ -52,7 +52,7 @@ class RecipeResource(Resource):
         recipe = Recipe.get_by_id(recipe_id)
 
         if not recipe:
-            abort(404)
+            abort(404, {"message" : "Recipe does not exist."})
 
         return recipe
 
@@ -68,7 +68,7 @@ class RecipeResource(Resource):
         abort_if_exists(g.user.id, category_id=category_id, recipe_name=args['title'])
 
         if not recipe:
-            abort(404)
+            abort(404, {"message" : "Recipe does not exist."})
 
         recipe.update(**recipe_parser.parse_args())
         return recipe
@@ -107,7 +107,7 @@ class RecipeCollectionResource(Resource):
             category = Category.get_by_title(title)
 
         if not category:
-            abort(404)
+            abort(404, {"message" : "Category does not exist."})
 
         # Get the category's recipes
         recipes = Recipe.query.filter_by(category_id=category.id)
@@ -126,9 +126,12 @@ class RecipeCollectionResource(Resource):
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, title=None):
         args = recipe_parser.parse_args()
+        if args['category_id'] != category_id:
+            abort(404, {"message" : "Provide valid category id."})
+            
         category = Category.get_by_id(category_id)
         if not category:
-            abort(404)
+            abort(404, {"message" : "Category does not exist."})
         # abort if recipe exists
         abort_if_exists(g.user.id, category_id=category_id, recipe_name=args['title'])
         recipe = Recipe.create(**args)

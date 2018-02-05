@@ -16,15 +16,15 @@ from .token import Token
 
 class User(SurrogatePK, Model):
     __tablename__ = 'users'
-    username = db.Column(db.String, unique=True, nullable=False)
-    email = db.Column(db.String, unique=True, nullable=False)
-    password_hash = db.Column(db.String, nullable=False)
-    first_name = db.Column(db.String, nullable=True)
-    last_name = db.Column(db.String, nullable=True)
-    created_at = db.Column(db.DateTime, nullable=False)
-    modified_at = db.Column(db.DateTime, nullable=False)
+    username = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(256), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+    first_name = db.Column(db.String(50), nullable=True)
+    last_name = db.Column(db.String(50), nullable=True)
+    created_at = db.Column(db.DateTime(256), nullable=False)
+    modified_at = db.Column(db.DateTime(256), nullable=False)
 
-    categories = relationship(Category, backref=db.backref('user'))
+    categories = relationship(Category, cascade="all, delete-orphan", backref=db.backref('user'))
 
     def __init__(self, username, email, password, **kwargs):
         db.Model.__init__(self, username=username, email=email,

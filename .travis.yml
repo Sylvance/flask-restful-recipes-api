@@ -17,7 +17,6 @@ install:
 
 before_script:
   - psql -c 'create database recipesdemo;' -U postgres
-  - flask db init
   - flask db migrate
   - flask db upgrade
 

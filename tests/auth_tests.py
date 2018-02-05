@@ -122,8 +122,9 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users",
                                     data=new_user_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 403)
-        self.assertIn("Wrong email or password", str(response.data))
+        self.assertEqual(response.status_code, 401)
+        self.assertIn("Incorrect credentials. Email should be correct. \
+                        Password should be more than 6 characters", str(response.data))
 
     def test_create_user_with_bad_email(self):
         """ 
@@ -141,8 +142,9 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users",
                                     data=new_user_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 403)
-        self.assertIn("Wrong email or password", str(response.data))
+        self.assertEqual(response.status_code, 401)
+        self.assertIn("Incorrect credentials. Email should be correct. \
+                        Password should be more than 6 characters", str(response.data))
 
     def test_signin_non_existing_user(self):
         """ 

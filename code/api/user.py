@@ -24,13 +24,16 @@ def valid_id(value, name):
     return value
 
 user_parser = reqparse.RequestParser()
-user_parser.add_argument('username', type = valid_str)
+user_parser.add_argument('username', type = valid_str, \
+                        help="Username cannot be integer")
 user_parser.add_argument('password', type = str, \
                         help="Password cannot be blank!")
 user_parser.add_argument('email', type = str, \
                         help="Email cannot be blank!")
-user_parser.add_argument('first_name', type = valid_str)
-user_parser.add_argument('last_name', type = valid_str)
+user_parser.add_argument('first_name', type = valid_str, \
+                        help="First name cannot be integer")
+user_parser.add_argument('last_name', type = valid_str, \
+                        help="Last name cannot be integer")
 
 # From the request headers
 parser = reqparse.RequestParser()
@@ -141,10 +144,11 @@ class UserCollectionResource(Resource):
                 return result, 409
         result = {
             'status': 'Fail',
-            'status code': 403,
-            'message': 'Wrong email or password'
+            'status code': 401,
+            'message': 'Incorrect credentials. Email should be correct. \
+                        Password should be more than 6 characters'
         }
-        return result, 403 
+        return result, 401 
 
 
 class UserSigninResource(Resource):
