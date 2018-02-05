@@ -17,12 +17,12 @@ class Category(SurrogatePK, Model):
     __tablename__ = 'categories'
     # Define a foreign key relationship to a User object
     user_id = ReferenceCol('users')
-    title = db.Column(db.String(255), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
-    modified_at = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.DateTime(256), nullable=False)
+    modified_at = db.Column(db.DateTime(256), nullable=False)
 
-    recipes = relationship(Recipe, backref=db.backref('category'))
+    recipes = relationship(Recipe, cascade="all, delete-orphan", backref=db.backref('category'))
 
     def __init__(self, **kwargs):
         db.Model.__init__(self, **kwargs)

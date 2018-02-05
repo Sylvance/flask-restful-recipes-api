@@ -14,7 +14,7 @@ class Recipe(SurrogatePK, Model):
     __tablename__ = 'recipes'
     # Define a foreign key relationship to a Category object
     category_id = ReferenceCol('categories')
-    title = db.Column(db.String(255), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
     modified_at = db.Column(db.DateTime, nullable=False)

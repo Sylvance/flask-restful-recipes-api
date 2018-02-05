@@ -13,7 +13,7 @@ class Token(SurrogatePK, Model):
 
     __tablename__ = 'tokens'
     token = db.Column(db.String(500), unique=True, nullable=False)
-    banned_on = db.Column(db.DateTime, nullable=False)
+    banned_on = db.Column(db.DateTime(256), nullable=False)
 
     def __init__(self, token, **kwargs):
         db.Model.__init__(self, token = token, **kwargs)

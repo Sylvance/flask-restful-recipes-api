@@ -71,18 +71,6 @@ class AuthTestCases(unittest.TestCase):
         res = json.loads(response.data.decode())
         self.category_id = res['id']
 
-    
-    # def test_get_categories(self):
-    #     """ 
-    #         A test for retrieving list of categories
-    #         The url endpoint is;
-    #             =>    /categories (get)
-    #     """
-    #     response = self.tester.post("/api/users/"+ str(self.user_id) +"/categories",
-    #                                 headers=dict(Authorization='Bearer ' + self.token),
-    #                                 content_type="application/json")
-    #     print(response.data)
-    #     self.assertEqual(response.status_code, 201)
 
     def test_create_new_category(self):
         """ 
@@ -111,6 +99,69 @@ class AuthTestCases(unittest.TestCase):
                                     headers=dict(Authorization='Bearer ' + self.token),
                                     content_type="application/json") 
         self.assertEqual(response.status_code, 400)
+        self.assertIn("Category already exists", str(response.data))
+
+    def test_update_new_category(self):
+        """ 
+            A test for creating new categories
+            The url endpoint is;
+                =>    /categories (post)
+        """
+        # Update a Category
+        new_category_data = json.dumps(dict({
+            "title": "Chinese",
+            "description": "Dishes Made in China"
+        }))
+        response = self.tester.post("/api/users/{}/categories/{}".format(self.user_id, self.category_id),
+                                    data=new_category_data,
+                                    headers=dict(Authorization='Bearer ' + self.token),
+                                    content_type="application/json")
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_existing_category(self):
+        existing_category_data = json.dumps(dict({
+            "title": "Kenyan",
+            "description": "Dishes Made in Kenya"
+        }))
+        response = self.tester.post("/api/users/{}/categories/{}".format(self.user_id, self.category_id),
+                                    data=existing_category_data,
+                                    headers=dict(Authorization='Bearer ' + self.token),
+                                    content_type="application/json")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Category already exists", str(response.data))
+    
+    def test_get_category_by_id(self):
+        """ 
+            A test for getting categories by id
+            The url endpoint is;
+                =>    /api/users/id/categories/id (get)
+        """
+        response = self.tester.get("/api/users/{}/categories/{}".format(self.user_id, self.category_id),
+                                    headers=dict(Authorization='Bearer ' + self.token))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Dishes Made in Kenya", str(response.data))
+    
+    def test_get_categories(self):
+        """ 
+            A test for getting categories
+            The url endpoint is;
+                =>    /api/users/id/categories (get)
+        """
+        response = self.tester.get("/api/users/{}/categories".format(self.user_id),
+                                    headers=dict(Authorization='Bearer ' + self.token))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Dishes Made in Kenya", str(response.data))
+    
+    def test_delete_category_by_id(self):
+        """ 
+            A test for deleting categories by id
+            The url endpoint is;
+                =>    /api/users/id/categories/id (get)
+        """
+        response = self.tester.delete("/api/users/{}/categories/{}".format(self.user_id, self.category_id),
+                                    headers=dict(Authorization='Bearer ' + self.token))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Delete", str(response.data))
 
 if __name__ == "__main__":
     unittest.main()
