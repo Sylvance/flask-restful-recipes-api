@@ -41,12 +41,13 @@ category_collection_fields = {
 
 
 class CategoryResource(Resource):
-
+    """ Resource that gets, deletes and updates a category by id"""
     @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(category_fields)
     def get(self, current_user, user_id=None, category_id=0, **kwargs):
+        """ Resource that gets a category by id"""
         category = Category.get_by_id(category_id)
         if not category:
             abort(404)
@@ -58,6 +59,7 @@ class CategoryResource(Resource):
     @validate_json
     @marshal_with(category_fields)
     def post(self, current_user, user_id=None, category_id=0, **kwargs):
+        """ Resource that updates a category by id"""
         category = Category.get_by_id(category_id)
         args = category_parser.parse_args()
         abort_if_exists(g.user.id, category_name=args['title'])
@@ -72,6 +74,7 @@ class CategoryResource(Resource):
     @token_required
     @self_only
     def delete(self, current_user, user_id=None, category_id=0, **kwargs):
+        """ Resource that deletes a category by id"""
         category = Category.get_by_id(category_id)
 
         if not category:
@@ -86,13 +89,14 @@ class CategoryResource(Resource):
 
 
 class CategoryCollectionResource(Resource):
-
+    """ Resource that gets a list of categories and creates a new category """
     @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(category_collection_fields)
     @paginate()
     def get(self, current_user, user_id=None, username=None, title=None):
+        """ Resource that gets a list of categories """
         # Find user that category goes with
         user = None
         if user_id:
@@ -120,6 +124,7 @@ class CategoryCollectionResource(Resource):
     @validate_json
     @marshal_with(category_fields)
     def post(self, current_user, user_id=None, username=None):
+        """ Resource that creates a new category """
         args = category_parser.parse_args()
         abort_if_exists(g.user.id, category_name=args['title'])
         # user owns the category

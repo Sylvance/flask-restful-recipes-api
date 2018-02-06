@@ -63,11 +63,13 @@ user_collection_fields = {
 
 
 class UserResource(Resource):
+    """ Resource that gets, deletes and updates a user by id. """
     @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(user_fields)
     def get(self, current_user, user_id=None, username=None):
+        """ Resource that gets a user by id"""
         user = None
         print(user_id)
         if username is not None:
@@ -86,6 +88,7 @@ class UserResource(Resource):
     @validate_json
     @marshal_with(user_fields)
     def post(self, current_user, user_id=None, username=None):
+        """ Resource that updates a user by id"""
         g.user.update(**user_parser.parse_args())
         return g.user
 
@@ -93,6 +96,7 @@ class UserResource(Resource):
     @token_required
     @self_only
     def delete(self, current_user, user_id=None, username=None):
+        """ Resource that deletes a user by id"""
         g.user.delete()
         result = {
             'status': 'Success',
@@ -103,14 +107,17 @@ class UserResource(Resource):
 
 
 class UserCollectionResource(Resource):
+    """ Resource that gets a list of users and creates a new user """
     @marshal_with(user_collection_fields)
     @paginate()
     def get(self):
+        """ Resource that gets a list of users"""
         users = User.query
         return users
     
     @validate_json
     def post(self):
+        """ Resource that creates a new user """
         args = user_parser.parse_args()
         email = args['email']
         username = args['username']
@@ -152,9 +159,10 @@ class UserCollectionResource(Resource):
 
 
 class UserSigninResource(Resource):
-    
+    """ Resource that signs in a user """
     @validate_json
     def post(self):
+        """ Resource that signs in a user """
         args = user_parser.parse_args()
         email = args['email']
         username = args['username']
@@ -187,8 +195,7 @@ class UserSigninResource(Resource):
 # SignoutUser
 # Signs out a User if logged in
 class UserSignoutResource(Resource):
-    """ Signout class"""
-
+    """ Resource that signs out a user """
     def get(self):
         """
         Try to logout a user using a token

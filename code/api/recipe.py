@@ -43,12 +43,13 @@ recipe_collection_fields = {
 
 
 class RecipeResource(Resource):
-
+    """ Resource that gets, deletes and updates a recipe by id"""
     @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(recipe_fields)
     def get(self, current_user, category_id=None, recipe_id=0, **kwargs):
+        """ Resource that gets a recipe by id"""
         recipe = Recipe.get_by_id(recipe_id)
 
         if not recipe:
@@ -62,6 +63,7 @@ class RecipeResource(Resource):
     @validate_json
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, recipe_id=0, **kwargs):
+        """ Resource that updates a recipe by id"""
         args = recipe_parser.parse_args()
         recipe = Recipe.get_by_id(recipe_id)
         # abort if recipe exists
@@ -77,6 +79,7 @@ class RecipeResource(Resource):
     @token_required
     @self_only
     def delete(self, current_user, category_id=None, recipe_id=0, **kwargs):
+        """ Resource that deletes a recipe by id"""
         recipe = Recipe.get_by_id(recipe_id)
 
         if not recipe:
@@ -92,13 +95,14 @@ class RecipeResource(Resource):
 
 
 class RecipeCollectionResource(Resource):
-
+    """ Resource that gets a list of recipes and creates a new recipe """
     @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(recipe_collection_fields)
     @paginate()
     def get(self, current_user, category_id=None, title=None):
+        """ Resource that gets a list of recipes """        
         # Find category that recipe goes with
         category = None
         if category_id:
@@ -126,6 +130,7 @@ class RecipeCollectionResource(Resource):
     @validate_json
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, title=None):
+        """ Resource that creates a new recipe """        
         args = recipe_parser.parse_args()
         if args['category_id'] != category_id:
             abort(404, {"message" : "Provide valid category id."})
