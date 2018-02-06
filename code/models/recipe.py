@@ -37,8 +37,8 @@ class Recipe(SurrogatePK, Model):
         recipes = cls.query.filter_by(category_id=category_id)
         recipeslist = []
         for recipe in recipes:
-            recipeslist.append(recipe.title)
-        if title in recipeslist:
+            recipeslist.append((recipe.title).lower())
+        if title.lower() in recipeslist:
             return True
         else:
             return False 

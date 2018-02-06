@@ -80,7 +80,6 @@ class CategoryResource(Resource):
         category.delete()
         result = {
             'status': 'Deleted',
-            'status code': 204,
             'message': 'Category deleted successfully'
         }
         return result
@@ -93,7 +92,7 @@ class CategoryCollectionResource(Resource):
     @self_only
     @marshal_with(category_collection_fields)
     @paginate()
-    def get(self, current_user, user_id=None, username=None):
+    def get(self, current_user, user_id=None, username=None, title=None):
         # Find user that category goes with
         user = None
         if user_id:
@@ -110,7 +109,8 @@ class CategoryCollectionResource(Resource):
         args = category_collection_parser.parse_args()
         # fancy url argument query filtering!
         if args['title'] is not None:
-            categories.filter_by(title=args['title'])
+            categories = Category.query.filter(Category.title.ilike(
+                '%' + args['title'] + '%')).filter(Category.user_id == g.user.id)
 
         return categories
 

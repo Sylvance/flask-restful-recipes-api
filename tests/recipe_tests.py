@@ -12,9 +12,9 @@ sys.path.insert(0, path + '/../')
 from code import create_app, db
 from flask import current_app
 
-class AuthTestCases(unittest.TestCase):
+class RecipeTestCases(unittest.TestCase):
     """
-    Tests for the authentication blueprint
+    Tests for the recipes blueprint
     """
     def setUp(self):
         """
@@ -123,9 +123,9 @@ class AuthTestCases(unittest.TestCase):
     
     def test_update_recipe_by_id(self):
         """ 
-            A test for creating new recipes
+            A test for updating recipes
             The url endpoint is;
-                =>    /api/categories/id/recipes (post)
+                =>    /api/categories/id/recipes/id (post)
         """
         # Create a Recipe
         new_recipe_data = json.dumps(dict({
@@ -141,9 +141,9 @@ class AuthTestCases(unittest.TestCase):
 
     def test_update_existing_recipe(self):
         """ 
-            A test for creating existing recipes
+            A test for updating existing recipes
             The url endpoint is;
-                =>    /api/categories/id/recipes (post)
+                =>    /api/categories/id/recipes/id (post)
         """
         # Create a Recipe
         new_recipe_data = json.dumps(dict({

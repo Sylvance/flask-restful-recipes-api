@@ -115,7 +115,8 @@ class RecipeCollectionResource(Resource):
         args = recipe_collection_parser.parse_args()
         # fancy url argument query filtering!
         if args['title'] is not None:
-            recipes.filter_by(title=args['title'])
+            recipes = Recipe.query.filter(Recipe.title.ilike(
+                '%' + args['title'] + '%')).filter(Recipe.category_id == category.id)
 
         return recipes
 

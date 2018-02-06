@@ -12,9 +12,9 @@ sys.path.insert(0, path + '/../')
 from code import create_app, db
 from flask import current_app
 
-class AuthTestCases(unittest.TestCase):
+class CategoryTestCases(unittest.TestCase):
     """
-    Tests for the authentication blueprint
+    Tests for the categories blueprint
     """
     def setUp(self):
         """
@@ -76,7 +76,7 @@ class AuthTestCases(unittest.TestCase):
         """ 
             A test for creating new categories
             The url endpoint is;
-                =>    /categories (post)
+                =>    /api/users/user_id/categories (post)
         """
         # Create a Category
         new_category_data = json.dumps(dict({
@@ -90,6 +90,12 @@ class AuthTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_create_existing_category(self):
+        """ 
+            A test for creating categories
+            The url endpoint is;
+                =>    /api/users/user_id/categories (post)
+        """
+        # Create an existing Category
         existing_category_data = json.dumps(dict({
             "title": "Kenyan",
             "description": "Dishes Made in Kenya"
@@ -103,9 +109,9 @@ class AuthTestCases(unittest.TestCase):
 
     def test_update_new_category(self):
         """ 
-            A test for creating new categories
+            A test for updating categories
             The url endpoint is;
-                =>    /categories (post)
+                =>    /api/users/{user_id}/categories/{category_id} (post)
         """
         # Update a Category
         new_category_data = json.dumps(dict({
@@ -119,6 +125,12 @@ class AuthTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_update_existing_category(self):
+        """ 
+            A test for updating categories
+            The url endpoint is;
+                =>    /api/users/{user_id}/categories/{category_id} (post)
+        """
+        # Update an existing Category
         existing_category_data = json.dumps(dict({
             "title": "Kenyan",
             "description": "Dishes Made in Kenya"
