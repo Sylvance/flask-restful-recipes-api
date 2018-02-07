@@ -62,7 +62,7 @@ class RecipeResource(Resource):
     @self_only
     @validate_json
     @marshal_with(recipe_fields)
-    def post(self, current_user, category_id=None, recipe_id=0, **kwargs):
+    def put(self, current_user, category_id=None, recipe_id=0, **kwargs):
         """ Resource that updates a recipe by id """
         args = recipe_parser.parse_args()
         recipe = Recipe.get_by_id(recipe_id)
@@ -123,6 +123,8 @@ class RecipeCollectionResource(Resource):
         if args['title'] is not None:
             recipes = Recipe.query.filter(Recipe.title.ilike(
                 '%' + args['title'] + '%')).filter(Recipe.category_id == category.id)
+            if not recipes:
+                abort(404, { "message": "Recipes for query do not exist" })
 
         return recipes
 
@@ -132,7 +134,7 @@ class RecipeCollectionResource(Resource):
     @validate_json
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, title=None):
-        """ Resource that creates a new recipe """        
+        """ Resource that creates a new recipe """
         args = recipe_parser.parse_args()
         if args['category_id'] != category_id:
             abort(404, { "message" : "Provide valid category id." })

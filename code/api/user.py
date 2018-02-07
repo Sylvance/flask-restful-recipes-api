@@ -87,7 +87,7 @@ class UserResource(Resource):
     @self_only
     @validate_json
     @marshal_with(user_fields)
-    def post(self, current_user, user_id=None, username=None):
+    def put(self, current_user, user_id=None, username=None):
         """ Resource that updates a user by id"""
         g.user.update(**user_parser.parse_args())
         return g.user
@@ -118,7 +118,6 @@ class UserCollectionResource(Resource):
         """ Resource that creates a new user """
         args = user_parser.parse_args()
         email = args['email']
-        username = args['username']
         password = args['password']
         if not email:
             result = { 'message': 'Email cannot be blank' }
@@ -126,14 +125,13 @@ class UserCollectionResource(Resource):
             
         if re.match(r"(^[a-zA-Z0-9_.]+@[a-zA-Z0-9-]+\.[a-z]+$)", email) and len(password) > 6:
             userbyemail = User.get_by_email(email)
-            # userbyname = User.get_by_username(username)
             if not userbyemail:
                 try:
                     user = User.create(**user_parser.parse_args())
                     if user:
                         result = { 'message': 'User has succesfully registered' }
                         return result, 201
-                except:
+                except Exception:
                     result = { 'message': 'Something went wrong when saving user'}
                     return result, 500
             else:

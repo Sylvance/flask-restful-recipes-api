@@ -125,7 +125,7 @@ class RecipeTestCases(unittest.TestCase):
         """
             A test for updating recipes
             The url endpoint is;
-                =>    /api/categories/id/recipes/id (post)
+                =>    /api/categories/id/recipes/id (put)
         """
         # Create a Recipe
         new_recipe_data = json.dumps(dict({
@@ -133,7 +133,7 @@ class RecipeTestCases(unittest.TestCase):
             "title" : "porridge",
             "description" : "brown"
         }))
-        response = self.tester.post("/api/categories/"+str(self.category_id)+"/recipes/{}".format(self.recipe_id),
+        response = self.tester.put("/api/categories/"+str(self.category_id)+"/recipes/{}".format(self.recipe_id),
                                     data=new_recipe_data,
                                     headers=dict(Authorization='Bearer ' + self.token),
                                     content_type="application/json")
@@ -143,7 +143,7 @@ class RecipeTestCases(unittest.TestCase):
         """
             A test for updating existing recipes
             The url endpoint is;
-                =>    /api/categories/id/recipes/id (post)
+                =>    /api/categories/id/recipes/id (put)
         """
         # Create a Recipe
         new_recipe_data = json.dumps(dict({
@@ -151,7 +151,7 @@ class RecipeTestCases(unittest.TestCase):
             "title" : "uji",
             "description" : "white"
         }))
-        response = self.tester.post("/api/categories/"+str(self.category_id)+"/recipes/{}".format(self.recipe_id),
+        response = self.tester.put("/api/categories/"+str(self.category_id)+"/recipes/{}".format(self.recipe_id),
                                     data=new_recipe_data,
                                     headers=dict(Authorization='Bearer ' + self.token),
                                     content_type="application/json")
