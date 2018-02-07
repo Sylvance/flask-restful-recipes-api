@@ -95,7 +95,6 @@ class UserResource(Resource):
     @ensure_auth_header
     @token_required
     @self_only
-    @classmethod
     def delete(self, current_user, user_id=None, username=None):
         """ Resource that deletes a user by id"""
         g.user.delete()
@@ -115,7 +114,6 @@ class UserCollectionResource(Resource):
         return users
     
     @validate_json
-    @classmethod
     def post(self):
         """ Resource that creates a new user """
         args = user_parser.parse_args()
