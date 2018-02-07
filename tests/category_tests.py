@@ -1,4 +1,4 @@
-""" The tests for the app"""
+"""The tests for the app"""
 import sys, os
 import unittest
 import flask
@@ -43,7 +43,6 @@ class CategoryTestCases(unittest.TestCase):
         response = self.tester.post("/api/users",
                                     data=self.user_data,
                                     content_type="application/json")
-        
         # Sign in user
         self.login_data = json.dumps(dict({
             "email" : "jumai@gmail.com",
@@ -73,7 +72,7 @@ class CategoryTestCases(unittest.TestCase):
 
 
     def test_create_new_category(self):
-        """ 
+        """
             A test for creating new categories
             The url endpoint is;
                 =>    /api/users/user_id/categories (post)
@@ -90,7 +89,7 @@ class CategoryTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_create_existing_category(self):
-        """ 
+        """
             A test for creating categories
             The url endpoint is;
                 =>    /api/users/user_id/categories (post)
@@ -108,7 +107,7 @@ class CategoryTestCases(unittest.TestCase):
         self.assertIn("Category already exists", str(response.data))
 
     def test_update_new_category(self):
-        """ 
+        """
             A test for updating categories
             The url endpoint is;
                 =>    /api/users/{user_id}/categories/{category_id} (post)
@@ -125,7 +124,7 @@ class CategoryTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_update_existing_category(self):
-        """ 
+        """
             A test for updating categories
             The url endpoint is;
                 =>    /api/users/{user_id}/categories/{category_id} (post)
@@ -143,7 +142,7 @@ class CategoryTestCases(unittest.TestCase):
         self.assertIn("Category already exists", str(response.data))
     
     def test_get_category_by_id(self):
-        """ 
+        """
             A test for getting categories by id
             The url endpoint is;
                 =>    /api/users/id/categories/id (get)
@@ -154,7 +153,7 @@ class CategoryTestCases(unittest.TestCase):
         self.assertIn("Dishes Made in Kenya", str(response.data))
     
     def test_get_categories(self):
-        """ 
+        """
             A test for getting categories
             The url endpoint is;
                 =>    /api/users/id/categories (get)
@@ -165,7 +164,7 @@ class CategoryTestCases(unittest.TestCase):
         self.assertIn("Dishes Made in Kenya", str(response.data))
     
     def test_delete_category_by_id(self):
-        """ 
+        """
             A test for deleting categories by id
             The url endpoint is;
                 =>    /api/users/id/categories/id (get)

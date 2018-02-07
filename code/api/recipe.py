@@ -43,13 +43,13 @@ recipe_collection_fields = {
 
 
 class RecipeResource(Resource):
-    """ Resource that gets, deletes and updates a recipe by id"""
-    @ensure_auth_header
+    """ Resource that gets, deletes and updates a recipe by id """
+     @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(recipe_fields)
     def get(self, current_user, category_id=None, recipe_id=0, **kwargs):
-        """ Resource that gets a recipe by id"""
+        """ Resource that gets a recipe by id """
         recipe = Recipe.get_by_id(recipe_id)
 
         if not recipe:
@@ -62,8 +62,9 @@ class RecipeResource(Resource):
     @self_only
     @validate_json
     @marshal_with(recipe_fields)
+    @classmethod
     def post(self, current_user, category_id=None, recipe_id=0, **kwargs):
-        """ Resource that updates a recipe by id"""
+        """ Resource that updates a recipe by id """
         args = recipe_parser.parse_args()
         recipe = Recipe.get_by_id(recipe_id)
         if args['category_id'] != category_id:
@@ -80,8 +81,9 @@ class RecipeResource(Resource):
     @ensure_auth_header
     @token_required
     @self_only
+    @classmethod
     def delete(self, current_user, category_id=None, recipe_id=0, **kwargs):
-        """ Resource that deletes a recipe by id"""
+        """ Resource that deletes a recipe by id """
         recipe = Recipe.get_by_id(recipe_id)
 
         if not recipe:
@@ -131,6 +133,7 @@ class RecipeCollectionResource(Resource):
     @self_only
     @validate_json
     @marshal_with(recipe_fields)
+    @classmethod
     def post(self, current_user, category_id=None, title=None):
         """ Resource that creates a new recipe """        
         args = recipe_parser.parse_args()
