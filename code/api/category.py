@@ -58,7 +58,7 @@ class CategoryResource(Resource):
     @self_only
     @validate_json
     @marshal_with(category_fields)
-    def post(self, current_user, user_id=None, category_id=0, **kwargs):
+    def put(self, current_user, user_id=None, category_id=0, **kwargs):
         """ Resource that updates a category by id"""
         category = Category.get_by_id(category_id)
         args = category_parser.parse_args()

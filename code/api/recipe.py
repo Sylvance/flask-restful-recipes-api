@@ -62,7 +62,7 @@ class RecipeResource(Resource):
     @self_only
     @validate_json
     @marshal_with(recipe_fields)
-    def post(self, current_user, category_id=None, recipe_id=0, **kwargs):
+    def put(self, current_user, category_id=None, recipe_id=0, **kwargs):
         """ Resource that updates a recipe by id """
         args = recipe_parser.parse_args()
         recipe = Recipe.get_by_id(recipe_id)

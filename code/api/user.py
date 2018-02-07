@@ -87,7 +87,7 @@ class UserResource(Resource):
     @self_only
     @validate_json
     @marshal_with(user_fields)
-    def post(self, current_user, user_id=None, username=None):
+    def put(self, current_user, user_id=None, username=None):
         """ Resource that updates a user by id"""
         g.user.update(**user_parser.parse_args())
         return g.user
