@@ -134,7 +134,7 @@ class RecipeCollectionResource(Resource):
     @validate_json
     @marshal_with(recipe_fields)
     def post(self, current_user, category_id=None, title=None):
-        """ Resource that creates a new recipe """        
+        """ Resource that creates a new recipe """
         args = recipe_parser.parse_args()
         if args['category_id'] != category_id:
             abort(404, { "message" : "Provide valid category id." })

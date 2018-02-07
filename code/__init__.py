@@ -39,7 +39,6 @@ def create_app(config_object=DefaultConfig):
     register_blueprints(app)
     error_handlers(app)
     from code.models.user import User
-    from code.database import db
     return app
 
 

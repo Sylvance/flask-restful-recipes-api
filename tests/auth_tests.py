@@ -1,7 +1,6 @@
 """ The tests for the app"""
 import sys, os
 import unittest
-import flask
 import json
 import jwt
 
@@ -10,7 +9,6 @@ path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, path + '/../')
 
 from code import create_app, db
-from flask import current_app
 
 class AuthTestCases(unittest.TestCase):
     """
@@ -244,8 +242,8 @@ class AuthTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
     
     def test_get_index(self):
-        """ 
-            A test to get the index page 
+        """
+            A test to get the index page
         """
         response = self.tester.get('/',
                                     headers=dict(Authorization='Bearer ' + self.token), 

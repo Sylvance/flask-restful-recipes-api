@@ -102,7 +102,7 @@ class CategoryTestCases(unittest.TestCase):
         response = self.tester.post("/api/users/"+ str(self.user_id) +"/categories",
                                     data=existing_category_data,
                                     headers=dict(Authorization='Bearer ' + self.token),
-                                    content_type="application/json") 
+                                    content_type="application/json")
         self.assertEqual(response.status_code, 400)
         self.assertIn("Category already exists", str(response.data))
 
