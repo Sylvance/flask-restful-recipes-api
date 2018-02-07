@@ -123,6 +123,8 @@ class RecipeCollectionResource(Resource):
         if args['title'] is not None:
             recipes = Recipe.query.filter(Recipe.title.ilike(
                 '%' + args['title'] + '%')).filter(Recipe.category_id == category.id)
+            if not recipes:
+                abort(404, { "message": "Recipes for query do not exist" })
 
         return recipes
 
