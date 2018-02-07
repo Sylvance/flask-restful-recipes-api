@@ -44,7 +44,7 @@ recipe_collection_fields = {
 
 class RecipeResource(Resource):
     """ Resource that gets, deletes and updates a recipe by id """
-     @ensure_auth_header
+    @ensure_auth_header
     @token_required
     @self_only
     @marshal_with(recipe_fields)
