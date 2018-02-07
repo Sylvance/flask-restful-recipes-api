@@ -1,8 +1,10 @@
 FORMAT: 1A
-HOST: http://localhost:5000/api
+HOST: https://resapi.herokuapp.com/api
 
-# YUMMY RECIPES API DOCUMENTATION
-Yummy recipes provides a platform for users to keep track of their awesome recipes and share with others if they so wish.
+
+# Yummy Recipes API Documentation
+
+Yummy recipes provides a platform for users to keep track of their awesome recipes and share with others if they so wish. To test this API live on heroku follow this [link.](https://sylvance.docs.apiary.io/)
 
 ## Authentication
 This API uses OAuth v2 Bearer Token / Personal Access Token for its authentication.
@@ -11,8 +13,9 @@ This API uses OAuth v2 Bearer Token / Personal Access Token for its authenticati
 
 ## Users [/users]
 
-### Sign up users [POST]
-This will sign up a new user and save his/her details in the database.
+### Sign up a user [POST]
+
+Create a new User with [username, password, email, bio] fields. The username must not be a space. The password 6 characters long. All fields must be valid for their type.
 
 + Request (application/json)
     + Attributes (Sign up usersRequest)
@@ -27,16 +30,41 @@ This will sign up a new user and save his/her details in the database.
                 "password": "starwars"
             }
 
++ Response 201 (application/json)
 
-+ Response 200 
+        {
+            "message": "Successfully signed up",
+            "status": "Success",
+            "status code": "201"
+        }
 
++ Response 400 (application/json)
 
+        {
+            "message": "Failed to decode JSON object: Expecting property name enclosed in double quotes: line %s column %s (char %s)"
+        }
 
++ Response 403 (application/json)
+        
+        {
+            "status": "Fail",
+            "status code": 403,
+            "message": "Wrong email or password"
+        }
 
-## Users Signin [/users/signin]
++ Response 409 (application/json)
 
-### Sign in user [POST]
-This will sign in a user and return a token as the response.
+        {
+            "status": "Fail",
+            "status code": 409,
+            "message": "User already exists"
+        }
+
+## User Sign In [/users/signin]
+
+### Sign in a user [POST]
+
+Sign in a new User with [email, password] fields. The username must not be a space(s). The password 6 characters long. All fields must be valid for their type.
 
 + Request (application/json)
     + Attributes (Sign in userRequest)
@@ -44,51 +72,144 @@ This will sign in a user and return a token as the response.
     + Body
 
             {
-                "email": "kerandisylvance@gmail.com",
-                "password": "starwars"
+                "email": "user@gmail.com",
+                "password": "waroftitans"
             }
 
++ Response 200 (application/json)
 
-+ Response 200 
+        {
+            "status": "Success",
+            "status code": 200,
+            "message": "User has signed in.",
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjAxNTc3NjcsImlhdCI6MTUxNzU2MjE2Nywic3ViIjoyfQ.Wtn-0s8KC7BNcF38cdbC2LNt1ZpQD0DkE-2Nfzub-rY"
+        }
 
++ Response 400 (application/json)
 
+        {
+            "message": "Failed to decode JSON object: Expecting property name enclosed in double quotes: line %s column %s (char %s)"
+        }
 
++ Response 401 (application/json)
 
-## Users Signout [/users/signout]
+        {
+            "status": "Fail",
+            "status code": 401,
+            "message": "User does not exist or incorrect password."
+        }
 
-### Sign out user [GET]
-This will sign out a user when given an authentication token.
++ Response 401 (application/json)
+        
+        {
+            "status": "Fail",
+            "status code": 401,
+            "message": "Wrong email or password"
+        }
 
-+ Response 200 
+## User Sign Out [/users/signout]
 
+### Sign out a user [GET]
 
+Sign out a User with [email, password] fields. The username must not be a space(s). The password 6 characters long. All fields must be valid for their type.
 
++ Request
 
+    + Headers
+
+            Authorization: Bearer JWT Token
+
++ Response 200 (application/json)
+
+        {
+            "status": "Success",
+            "status code": 200,
+            "message": "Successfully logged out"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "Failed to decode JSON object: Expecting property name enclosed in double quotes: line %s column %s (char %s)"
+        }
+
++ Response 405 (application/json)
+
+        {
+            "message": "The method is not allowed for the requested URL."
+        }
 
 # Group Categories
 
-## Users 1 Categories [/users/1/categories]
+## Categories [/users/{id}/categories]
 
-### Get all categories for a user [GET]
-This will get all categories that belong to a particular user.
+### List all available categories [GET]
 
-+ Response 200 
+Get a list of all available categories. A user must be logged in to access this route. The response is in json format
+
++ Parameters
+    + id - A path variable for user id that is required for a valid URL
+
++ Request
 
 
+    + Headers
 
-### Create a new category [POST]
-This will create a new category under the users account.
+            Authorization: Bearer JWT Token
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "categorytitle": "Kenyan Dishes",
+                "categorydescription": "Dishes Made in Kenya",
+                "user_id": 1,
+                "created_at": "Wed, 20 Dec 2017 17:28:54 -0000",
+                "modified_at": "Wed, 20 Dec 2017 17:28:54 -0000"
+            },
+            {
+                "id": 2,
+                "categorytitle": "Indian Dishes",
+                "categorydescription": "Dishes Made in India",
+                "user_id": 1,
+                "created_at": "Wed, 20 Dec 2017 17:29:24 -0000",
+                "modified_at": "Wed, 20 Dec 2017 17:29:24 -0000"
+            },
+            {
+                "id": 3,
+                "categorytitle": "Indiana Dishes",
+                "categorydescription": "Dishes Made in Indiana",
+                "user_id": 1,
+                "created_at": "Wed, 20 Dec 2017 23:18:48 -0000",
+                "modified_at": "Wed, 20 Dec 2017 23:18:48 -0000"
+            },
+            {
+                "id": 4,
+                "categorytitle": "Indonesia Dishes",
+                "categorydescription": "Dishes Made in Indonesia",
+                "user_id": 1,
+                "created_at": "Wed, 20 Dec 2017 23:19:33 -0000",
+                "modified_at": "Wed, 20 Dec 2017 23:19:33 -0000"
+            }
+        ]
+
+### Create a new category to the list. [POST]
+
+Create a new category to the list and respond with the newly created category. Category must not be existing for the current user.
 
 + Request (application/json)
     + Attributes (Create a new categoryRequest)
 
-    + Body
+    + Headers
 
+            Authorization: Bearer JWT Token
+    + Body
+            
             {
                 "title": "Kenyan",
                 "description": "Dishes"
             }
-
 
 + Response 201 (application/json)
     + Attributes (Create a new categoryResponse)
@@ -104,80 +225,23 @@ This will create a new category under the users account.
                 "modified_at": "Mon, 29 Jan 2018 19:36:07 -0000"
             }
 
+# Group Recipes
 
+## Recipes [/categories/{category_id}/recipes]
 
-## Users 1 Categories 1 [/users/1/categories/1]
+### List all available recipes [GET]
 
-### Get category by id [GET]
-This will get a user's category by its id.
+Get a list of all available recipes. A user must be logged in to access this route. The response is in json format
 
-+ Response 200 (application/json)
-    + Attributes (Get category by idResponse)
++ Parameters
+    + category_id - A path variable for category id that is required for a valid URL
 
-    + Body
++ Request
 
-            {
-                "id": 1,
-                "user_id": 1,
-                "title": "Kenyan",
-                "description": "Dishes",
-                "created_at": "Mon, 29 Jan 2018 19:21:30 -0000",
-                "modified_at": "Mon, 29 Jan 2018 19:21:30 -0000"
-            }
-
-
-### Update category by id [POST]
-This will update a category by its id. It will also update the modified timestamp
-
-+ Request (application/json)
-    + Attributes (Update category by idRequest)
-
-    + Body
-
-            {
-                "title": "Tanzanian",
-                "description": "Dishes"
-            }
-
-
-+ Response 200 (application/json)
-    + Attributes (Update category by idResponse)
-
-    + Body
-
-            {
-                "id": 1,
-                "user_id": 1,
-                "title": "Tanzanian",
-                "description": "Dishes",
-                "created_at": "Mon, 29 Jan 2018 19:21:30 -0000",
-                "modified_at": "Mon, 29 Jan 2018 19:31:41 -0000"
-            }
-
-
-### Delete category by id [DELETE]
-This will delete a category by id for a particular user.
-
-+ Response 204 
 
     + Headers
 
-            Access-Control-Allow-Origin:*
-            Content-Length:100
-            Date:Mon, 29 Jan 2018 16:38:31 GMT
-            Server:Werkzeug/0.14.1 Python/3.6.4
-
-    + Attributes (object)
-
-
-
-
-# Group Recipes
-
-## Categories 2 Recipes [/categories/2/recipes]
-
-### Get all recipes in a category [GET]
-This will get all the recipes that belong to a category for a particular user.
+            Authorization: Bearer JWT Token
 
 + Response 200 (application/json)
     + Attributes (Get all recipes in a categoryResponse)
@@ -200,21 +264,27 @@ This will get all the recipes that belong to a category for a particular user.
                 }
             }
 
+### Create a new recipe to the list. [POST]
 
-### Create a new recipe [POST]
-This will create a new recipe for the category.
+Create a new recipe to the list and respond with the newly created recipe. Recipe must not be existing for the current category.
+
++ Parameters
+    + category_id - A path variable for category id that is required for a valid URL
 
 + Request (application/json)
     + Attributes (Create a new recipeRequest)
 
-    + Body
 
+    + Headers
+
+            Authorization: Bearer JWT Token
+    + Body
+            
             {
                 "category_id": 2,
                 "title": "uji",
                 "description": "white"
             }
-
 
 + Response 201 (application/json)
     + Attributes (Create a new recipeResponse)
@@ -230,12 +300,117 @@ This will create a new recipe for the category.
                 "modified_at": "Mon, 29 Jan 2018 19:52:49 -0000"
             }
 
+# Group Single Category
+
+## Single Category [/users/{user_id}/categories/{category_id}]
+
+### Get a single category by id [GET]
+
+Get a single category. A user must be logged in to access this route. The response is in json format
+
++ Parameters
+    + user_id - A path variable for user id that is required for a valid URL
+    + category_id - A path variable for category id that is required for a valid URL
+
++ Request
 
 
-## Categories 2 Recipes 3 [/categories/2/recipes/3]
+    + Headers
 
-### Get recipe by id [GET]
-This will get your recipe by the id for the containing category for a particular user.
+            Authorization: Bearer JWT Token
+
++ Response 200 (application/json)
+    + Attributes (Get category by idResponse)
+
+    + Body
+
+            {
+                "id": 1,
+                "user_id": 1,
+                "title": "Kenyan",
+                "description": "Dishes",
+                "created_at": "Mon, 29 Jan 2018 19:21:30 -0000",
+                "modified_at": "Mon, 29 Jan 2018 19:21:30 -0000"
+            }
+
+### Update a single category by id [POST]
+
+Update a single category. A user must be logged in to access this route. The response is in json format
+
++ Parameters
+    + user_id - A path variable for user id that is required for a valid URL
+    + category_id - A path variable for category id that is required for a valid URL
+
++ Request (application/json)
+    + Attributes (Update category by idRequest)
+
+
+    + Headers
+
+            Authorization: Bearer JWT Token
+
+    + Body
+
+            {
+                "title": "Tanzanian",
+                "description": "Dishes"
+            }
+
++ Response 200 (application/json)
+    + Attributes (Update category by idResponse)
+
+    + Body
+
+            {
+                "id": 1,
+                "user_id": 1,
+                "title": "Tanzanian",
+                "description": "Dishes",
+                "created_at": "Mon, 29 Jan 2018 19:21:30 -0000",
+                "modified_at": "Mon, 29 Jan 2018 19:31:41 -0000"
+            }
+
+### Remove a single category by id [DELETE]
+
+Remove a single category. A user must be logged in to access this route. The response is in json format
+
++ Parameters
+    + user_id - A path variable for user id that is required for a valid URL
+    + category_id - A path variable for category id that is required for a valid URL
+
++ Request
+
+
+    + Headers
+
+            Authorization: Bearer JWT Token
+
++ Response 200 (application/json)
+
+        {
+            "message": "Delete category success",
+            "status": "Success",
+            "status code": "200"
+        }
+
+# Group Single Recipes
+
+## Single Recipe [/categories/{category_id}/recipes/{recipe_id}]
+
+### Get a single recipe by id [GET]
+
+Get a single recipe. A user must be logged in to access this route. The response is in json format
+
++ Parameters
+    + category_id - A path variable for category id that is required for a valid URL
+    + recipe_id - A path variable for recipe id that is required for a valid URL
+
++ Request
+
+
+    + Headers
+
+            Authorization: Bearer JWT Token
 
 + Response 200 (application/json)
     + Attributes (Get recipe by idResponse)
@@ -251,12 +426,21 @@ This will get your recipe by the id for the containing category for a particular
                 "modified_at": "Mon, 29 Jan 2018 19:52:49 -0000"
             }
 
+### Update a single recipe by id [POST]
 
-### Update recipe by id [POST]
-This will update your recipe by id for a particular user in its containing category.
+Update a single recipe. A user must be logged in to access this route. The response is in json format
+
++ Parameters
+    + category_id - A path variable for category id that is required for a valid URL
+    + recipe_id - A path variable for recipe id that is required for a valid URL
 
 + Request (application/json)
     + Attributes (Update recipe by idRequest)
+
+
+    + Headers
+
+            Authorization: Bearer JWT Token
 
     + Body
 
@@ -264,7 +448,6 @@ This will update your recipe by id for a particular user in its containing categ
                 "title": "porridge",
                 "description": "brown"
             }
-
 
 + Response 200 (application/json)
     + Attributes (Update recipe by idResponse)
@@ -280,25 +463,28 @@ This will update your recipe by id for a particular user in its containing categ
                 "modified_at": "Mon, 29 Jan 2018 20:00:43 -0000"
             }
 
+### Remove a single recipe by id [DELETE]
 
+Remove a single recipe. A user must be logged in to access this route. The response is in json format
 
-## Categories 2 Recipes 2 [/categories/2/recipes/2]
++ Parameters
+    + category_id - A path variable for category id that is required for a valid URL
+    + recipe_id - A path variable for recipe id that is required for a valid URL
 
-### Delete recipe by id [DELETE]
-This will delete a recipe by id for a particular user in its containing category
++ Request 
 
-+ Response 204 
 
     + Headers
 
-            Access-Control-Allow-Origin:*
-            Content-Length:98
-            Date:Mon, 29 Jan 2018 17:04:29 GMT
-            Server:Werkzeug/0.14.1 Python/3.6.4
+            Authorization: Bearer JWT Token
 
-    + Attributes (object)
++ Response 201 (application/json)
 
-
+        {
+            "message": "Delete recipe success",
+            "status": "Success",
+            "status code": "201"
+        }
 
 
 # Data Structures
