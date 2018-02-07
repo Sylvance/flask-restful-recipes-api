@@ -1,4 +1,4 @@
-""" The tests for the app"""
+"""The tests for the app"""
 import sys, os
 import unittest
 import flask
@@ -86,7 +86,7 @@ class RecipeTestCases(unittest.TestCase):
 
 
     def test_create_new_recipe(self):
-        """ 
+        """
             A test for creating new recipes
             The url endpoint is;
                 =>    /api/categories/id/recipes (post)
@@ -104,7 +104,7 @@ class RecipeTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_create_existing_recipe(self):
-        """ 
+        """
             A test for creating existing recipes
             The url endpoint is;
                 =>    /api/categories/id/recipes (post)
@@ -122,7 +122,7 @@ class RecipeTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
     
     def test_update_recipe_by_id(self):
-        """ 
+        """
             A test for updating recipes
             The url endpoint is;
                 =>    /api/categories/id/recipes/id (post)
@@ -140,7 +140,7 @@ class RecipeTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_update_existing_recipe(self):
-        """ 
+        """
             A test for updating existing recipes
             The url endpoint is;
                 =>    /api/categories/id/recipes/id (post)
@@ -158,7 +158,7 @@ class RecipeTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
     
     def test_get_recipes(self):
-        """ 
+        """
             A test for creating new recipes
             The url endpoint is;
                 =>    /api/categories/id/recipes (get)
@@ -168,7 +168,7 @@ class RecipeTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_get_recipe_by_id(self):
-        """ 
+        """
             A test for creating new recipes
             The url endpoint is;
                 =>    /api/categories/id/recipes/id (get)
@@ -178,7 +178,7 @@ class RecipeTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_delete_recipe_by_id(self):
-        """ 
+        """
             A test for creating new recipes
             The url endpoint is;
                 =>    /api/categories/id/recipes/id (delete)
