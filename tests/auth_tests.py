@@ -178,28 +178,28 @@ class AuthTestCases(unittest.TestCase):
         """ 
             A test for signing out user with authentication
             The url endpoint is;
-                =>    /api/users/signout"/users (post)
+                =>    /api/users/signout (get)
         """
-        response = self.tester.post("/api/users/signout",
+        response = self.tester.get("/api/users/signout",
                                     headers=dict(Authorization='Bearer ' + self.token))
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 200)
 
     def test_signout_user_without_auth(self):
         """ 
             A test for signing out user without authentication
             The url endpoint is;
-                =>    /api/users/signout (post)
+                =>    /api/users/signout (get)
         """
-        response = self.tester.post("/api/users/signout")
+        response = self.tester.get("/api/users/signout")
         self.assertEqual(response.status_code, 403)
 
     def test_signout_user_with_invalid_auth(self):
         """ 
             A test for signing out user with invalid authentication
             The url endpoint is;
-                =>    /api/users/signout (post)
+                =>    /api/users/signout (get)
         """
-        response = self.tester.post("/api/users/signout",
+        response = self.tester.get("/api/users/signout",
                                     headers=dict(Authorization='Bearer' + self.token))
         self.assertEqual(response.status_code, 403)
 
@@ -207,9 +207,9 @@ class AuthTestCases(unittest.TestCase):
         """ 
             A test for signing out user with invalid token
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users/signout (get)
         """
-        response = self.tester.post("/api/users/signout",
+        response = self.tester.get("/api/users/signout",
                                     headers=dict(Authorization='Bearer'))
         self.assertEqual(response.status_code, 403)
 
@@ -217,9 +217,9 @@ class AuthTestCases(unittest.TestCase):
         """ 
             A test for signing out user with incorrect token
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users/signout (get)
         """
-        response = self.tester.post("/api/users/signout",
+        response = self.tester.get("/api/users/signout",
                                     headers=dict(Authorization='Bearer SDSF@2.CDSFSfd.sAQedwsfe2w'))
         self.assertEqual(response.status_code, 401)
 
@@ -227,10 +227,10 @@ class AuthTestCases(unittest.TestCase):
         """ 
             A test for signing out user with banned token
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users/signout (get)
         """
         self.test_signout_user_with_auth()
-        response = self.tester.post("/api/users/signout",
+        response = self.tester.get("/api/users/signout",
                                     headers=dict(Authorization='Bearer' + self.token))
         self.assertEqual(response.status_code, 403)
     

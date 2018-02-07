@@ -110,14 +110,14 @@ class CategoryTestCases(unittest.TestCase):
         """
             A test for updating categories
             The url endpoint is;
-                =>    /api/users/{user_id}/categories/{category_id} (post)
+                =>    /api/users/{user_id}/categories/{category_id} (put)
         """
         # Update a Category
         new_category_data = json.dumps(dict({
             "title": "Chinese",
             "description": "Dishes Made in China"
         }))
-        response = self.tester.post("/api/users/{}/categories/{}".format(self.user_id, self.category_id),
+        response = self.tester.put("/api/users/{}/categories/{}".format(self.user_id, self.category_id),
                                     data=new_category_data,
                                     headers=dict(Authorization='Bearer ' + self.token),
                                     content_type="application/json")
@@ -127,14 +127,14 @@ class CategoryTestCases(unittest.TestCase):
         """
             A test for updating categories
             The url endpoint is;
-                =>    /api/users/{user_id}/categories/{category_id} (post)
+                =>    /api/users/{user_id}/categories/{category_id} (put)
         """
         # Update an existing Category
         existing_category_data = json.dumps(dict({
             "title": "Kenyan",
             "description": "Dishes Made in Kenya"
         }))
-        response = self.tester.post("/api/users/{}/categories/{}".format(self.user_id, self.category_id),
+        response = self.tester.put("/api/users/{}/categories/{}".format(self.user_id, self.category_id),
                                     data=existing_category_data,
                                     headers=dict(Authorization='Bearer ' + self.token),
                                     content_type="application/json")
