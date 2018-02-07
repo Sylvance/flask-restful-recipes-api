@@ -113,7 +113,7 @@ Sign in a new User with [email, password] fields. The username must not be a spa
 
 Sign out a User with [email, password] fields. The username must not be a space(s). The password 6 characters long. All fields must be valid for their type.
 
-+ Request (application/json)
++ Request
 
     + Headers
 
@@ -148,18 +148,14 @@ Sign out a User with [email, password] fields. The username must not be a space(
 Get a list of all available categories. A user must be logged in to access this route. The response is in json format
 
 + Parameters
-    + id - A path variable for users id that is required for a valid URL
+    + id - A path variable for user id that is required for a valid URL
 
-+ Request (application/json)
++ Request
 
 
     + Headers
 
             Authorization: Bearer JWT Token
-
-+ Response 200 (application/json)
-
-        []
 
 + Response 200 (application/json)
 
@@ -240,7 +236,7 @@ Get a list of all available recipes. A user must be logged in to access this rou
 + Parameters
     + category_id - A path variable for category id that is required for a valid URL
 
-+ Request (application/json)
++ Request
 
 
     + Headers
@@ -316,7 +312,7 @@ Get a single category. A user must be logged in to access this route. The respon
     + user_id - A path variable for user id that is required for a valid URL
     + category_id - A path variable for category id that is required for a valid URL
 
-+ Request (application/json)
++ Request
 
 
     + Headers
@@ -382,7 +378,7 @@ Remove a single category. A user must be logged in to access this route. The res
     + user_id - A path variable for user id that is required for a valid URL
     + category_id - A path variable for category id that is required for a valid URL
 
-+ Request (application/json)
++ Request
 
 
     + Headers
@@ -409,7 +405,7 @@ Get a single recipe. A user must be logged in to access this route. The response
     + category_id - A path variable for category id that is required for a valid URL
     + recipe_id - A path variable for recipe id that is required for a valid URL
 
-+ Request (application/json)
++ Request
 
 
     + Headers
@@ -475,7 +471,7 @@ Remove a single recipe. A user must be logged in to access this route. The respo
     + category_id - A path variable for category id that is required for a valid URL
     + recipe_id - A path variable for recipe id that is required for a valid URL
 
-+ Request (application/json)
++ Request 
 
 
     + Headers
