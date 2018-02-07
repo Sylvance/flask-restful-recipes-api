@@ -122,7 +122,7 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users",
                                     data=new_user_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 400)
         self.assertIn("Incorrect credentials. Email should be correct. \
                         Password should be more than 6 characters", str(response.data))
 
@@ -142,7 +142,7 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users",
                                     data=new_user_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 400)
         self.assertIn("Incorrect credentials. Email should be correct. \
                         Password should be more than 6 characters", str(response.data))
 
@@ -159,7 +159,7 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users/signin",
                                     data=login_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 400)
 
     def test_signin_non_wrong_email(self):
         """ 
@@ -174,7 +174,7 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users/signin",
                                     data=login_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 400)
 
     def test_signout_user_with_auth(self):
         """ 
