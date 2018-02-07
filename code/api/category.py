@@ -50,7 +50,7 @@ class CategoryResource(Resource):
         """ Resource that gets a category by id"""
         category = Category.get_by_id(category_id)
         if not category:
-            abort(404)
+            abort(404, { "message": "Category does not exist" })
         return category
 
     @ensure_auth_header
@@ -65,7 +65,7 @@ class CategoryResource(Resource):
         abort_if_exists(g.user.id, category_name=args['title'])
 
         if not category:
-            abort(404)
+            abort(404, { "message": "Category does not exist" })
 
         category.update(**category_parser.parse_args())
         return category
@@ -105,7 +105,7 @@ class CategoryCollectionResource(Resource):
             user = User.get_by_username(username)
 
         if not user:
-            abort(404)
+            abort(404, { "message": "User does not exist" })
 
         # Get the user's categories
         categories = Category.query.filter_by(user_id=user.id)
