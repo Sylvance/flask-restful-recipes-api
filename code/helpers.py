@@ -69,8 +69,8 @@ def abort_if_exists(user_id, category_name=None, category_id=None, recipe_name=N
         categories = Category.get_user_all(user_id)
         categorylist = []
         for category in categories:
-            categorylist.append(category.title)
-        if category_name in categorylist:
+            categorylist.append((category.title).lower())
+        if category_name.lower() in categorylist:
             abort(400, {"status" : "Bad request","state" : "Category already exists"})
     if recipe_name:
         category = Category.get_by_id(category_id)

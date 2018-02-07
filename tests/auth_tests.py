@@ -63,7 +63,7 @@ class AuthTestCases(unittest.TestCase):
         """ 
             A test for retrieving list of users
             The url endpoint is;
-                =>    /users (get)
+                =>    /api/users (get)
         """
         response = self.tester.get('/api/users',
                                     headers=dict(Authorization='Bearer ' + self.token), 
@@ -74,7 +74,7 @@ class AuthTestCases(unittest.TestCase):
         """ 
             A test for creating new users
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users (post)
         """
         new_user_data = json.dumps(dict({
             "username" : "Juma",
@@ -90,9 +90,9 @@ class AuthTestCases(unittest.TestCase):
 
     def test_create_existing_user(self):
         """ 
-            A test for creating new users
+            A test for creating existing user
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users (post)
         """
         self.test_create_new_user()
         new_user_data = json.dumps(dict({
@@ -112,7 +112,7 @@ class AuthTestCases(unittest.TestCase):
         """ 
             A test for creating new users
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users (post)
         """
         new_user_data = json.dumps(dict({
             "username": "Sylvano",
@@ -122,15 +122,14 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users",
                                     data=new_user_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 401)
-        self.assertIn("Incorrect credentials. Email should be correct. \
-                        Password should be more than 6 characters", str(response.data))
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Incorrect credentials.", str(response.data))
 
     def test_create_user_with_bad_email(self):
         """ 
             A test for creating new users
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users (post)
         """
         new_user_data = json.dumps(dict({
             "username" : "Jumai",
@@ -142,15 +141,14 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users",
                                     data=new_user_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 401)
-        self.assertIn("Incorrect credentials. Email should be correct. \
-                        Password should be more than 6 characters", str(response.data))
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Incorrect credentials.", str(response.data))
 
     def test_signin_non_existing_user(self):
         """ 
-            A test for creating new users
+            A test for signing in non-existing user
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users/signin (post)
         """
         login_data = json.dumps(dict({
             "email": "nonexsting@gmail.com",
@@ -159,13 +157,13 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users/signin",
                                     data=login_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 400)
 
     def test_signin_non_wrong_email(self):
         """ 
-            A test for creating new users
+            A test for signing in user with wrong email
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users/signin (post)
         """
         login_data = json.dumps(dict({
             "email": "nonexsting.com",
@@ -174,13 +172,13 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users/signin",
                                     data=login_data,
                                     content_type="application/json")
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 400)
 
     def test_signout_user_with_auth(self):
         """ 
-            A test for creating new users
+            A test for signing out user with authentication
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users/signout"/users (post)
         """
         response = self.tester.post("/api/users/signout",
                                     headers=dict(Authorization='Bearer ' + self.token))
@@ -188,18 +186,18 @@ class AuthTestCases(unittest.TestCase):
 
     def test_signout_user_without_auth(self):
         """ 
-            A test for creating new users
+            A test for signing out user without authentication
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users/signout (post)
         """
         response = self.tester.post("/api/users/signout")
         self.assertEqual(response.status_code, 403)
 
     def test_signout_user_with_invalid_auth(self):
         """ 
-            A test for creating new users
+            A test for signing out user with invalid authentication
             The url endpoint is;
-                =>    /users (post)
+                =>    /api/users/signout (post)
         """
         response = self.tester.post("/api/users/signout",
                                     headers=dict(Authorization='Bearer' + self.token))
@@ -207,7 +205,7 @@ class AuthTestCases(unittest.TestCase):
 
     def test_signout_user_with_invalid_token(self):
         """ 
-            A test for creating new users
+            A test for signing out user with invalid token
             The url endpoint is;
                 =>    /users (post)
         """
@@ -217,7 +215,7 @@ class AuthTestCases(unittest.TestCase):
 
     def test_signout_user_with_incorrect_token(self):
         """ 
-            A test for creating new users
+            A test for signing out user with incorrect token
             The url endpoint is;
                 =>    /users (post)
         """
@@ -225,9 +223,9 @@ class AuthTestCases(unittest.TestCase):
                                     headers=dict(Authorization='Bearer SDSF@2.CDSFSfd.sAQedwsfe2w'))
         self.assertEqual(response.status_code, 401)
 
-    def test_signin_with_banned_token(self):
+    def test_signout_with_banned_token(self):
         """ 
-            A test for creating new users
+            A test for signing out user with banned token
             The url endpoint is;
                 =>    /users (post)
         """
@@ -237,7 +235,8 @@ class AuthTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 403)
     
     def test_get_404(self):
-        """ 
+        """
+            A test to get a 404 page 
         """
         response = self.tester.get('/brew',
                                     headers=dict(Authorization='Bearer ' + self.token), 
@@ -246,6 +245,7 @@ class AuthTestCases(unittest.TestCase):
     
     def test_get_index(self):
         """ 
+            A test to get the index page 
         """
         response = self.tester.get('/',
                                     headers=dict(Authorization='Bearer ' + self.token), 
