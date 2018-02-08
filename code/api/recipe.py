@@ -104,7 +104,7 @@ class RecipeCollectionResource(Resource):
     @marshal_with(recipe_collection_fields)
     @paginate()
     def get(self, current_user, category_id=None, title=None):
-        """ Resource that gets a list of recipes """        
+        """ Resource that gets a list of recipes """
         # Find category that recipe goes with
         category = None
         if category_id:

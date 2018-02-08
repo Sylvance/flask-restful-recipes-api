@@ -41,7 +41,6 @@ class AuthTestCases(unittest.TestCase):
         response = self.tester.post("/api/users",
                                     data=self.user_data,
                                     content_type="application/json")
-        
         # Sign in user
         self.login_data = json.dumps(dict({
             "email" : "jumai@gmail.com",
@@ -52,9 +51,7 @@ class AuthTestCases(unittest.TestCase):
                                     content_type="application/json")
         res = json.loads(response.data.decode())
         self.token = res['token']
-        payload = jwt.decode(self.token, 
-                             'xoi82SJuX98#*$aIAjakj3sus',
-                             algorithms='HS256')
+        payload = jwt.decode(self.token, 'xoi82SJuX98#*$aIAjakj3sus', algorithms='HS256')
         self.user_id = payload['sub']
     
     def test_get_users(self):
@@ -234,10 +231,10 @@ class AuthTestCases(unittest.TestCase):
     
     def test_get_404(self):
         """
-            A test to get a 404 page 
+            A test to get a 404 page
         """
         response = self.tester.get('/brew',
-                                    headers=dict(Authorization='Bearer ' + self.token), 
+                                    headers=dict(Authorization='Bearer ' + self.token),
                                     content_type='application/json')
         self.assertEqual(response.status_code, 404)
     
