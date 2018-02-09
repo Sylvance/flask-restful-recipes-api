@@ -219,9 +219,9 @@ class UserSendRecoveryResource(Resource):
                             "<p>Click on this link to reset your password" \
                             "Recover url: " '<p>''<strong>' + recover_url +'</strong>''</p>' \
                             '<p> You will not be able to use this url in the next 24 Hours.' \
-                            'Please reset your password before then.</p>'
+                            'Please reset your password before then.</p>' \
                             "<hr/>" \
-                            "<h5>Yummy recipes password.</h5>" \
+                            "<h5>Yummy recipes password.</h5>"
                     with current_app.app_context():
                         mail.send(msg)
                     result = { 'message': 'Recovery email has been sent.' }
