@@ -5,6 +5,7 @@ class AuthTestCases(BaseTestCase):
     """
     Tests for the authentication blueprint
     """
+
     def test_get_users(self):
         """ 
             A test for retrieving list of users
