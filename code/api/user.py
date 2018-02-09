@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 import re
-from flask import abort, g
+from flask import abort, current_app, g
 from flask_restful import Resource, reqparse, marshal_with, fields
+from flask_mail import Message
 
+# Module imports
+from code import mail
 from code.api import api, meta_fields
 from code.api.auth import self_only, token_required, ensure_auth_header
 from code.models.user import User
@@ -154,7 +157,7 @@ class UserSigninResource(Resource):
             user = User.get_by_email(email)
             if user and user.check_password(password):
                 token = user.encode_auth_token(user.id)
-                result = { 'message': 'User has signed in.', 'token' : token.decode("utf-8") }
+                result = { 'message': 'User has signed in successfully.', 'token' : token.decode("utf-8") }
                 return result, 200
             result = { 'message': 'User does not exist or incorrect password.' }
             return result, 400
@@ -191,7 +194,82 @@ class UserSignoutResource(Resource):
         result = { 'message': 'Provide an authorization header' }
         return result, 403
 
+# SendRecoveryUser
+# Sends Recovery Email
+class UserSendRecoveryResource(Resource):
+    """ Resource that sends a user a recovery email """
+    @validate_json
+    def post(self):
+        """
+        Post the user's reset email
+        :return:
+        """
+        args = user_parser.parse_args()
+        recovery_email = args['email']
+        if re.match(r"[^@]+@[^@]+\.[^@]+", recovery_email):
+            user = User.get_by_email(recovery_email)
+            if user:
+                token = user.encode_recovery_token(recovery_email)
+                recovery_token = token.decode("utf-8")
+                recover_url = api.url_for(UserPasswordResetResource, token=token, _external=True)
+                try:
+                    msg = Message("Reset password Token", sender="kerandisylvance@gmail.com", recipients=[recovery_email])
+                    msg.html = "<h3>Hello, </h3>" \
+                            "<hr/>" \
+                            "<p>Click on this link to reset your password" \
+                            "Recover url: " '<p>''<strong>' + recover_url +'</strong>''</p>' \
+                            '<p> This url expires in 24 Hours so make sure' \
+                            'to reset the password before then</p>'
+                    with current_app.app_context():
+                        mail.send(msg)
+                    result = { 'message': 'Recovery email has been sent.' }
+                    return result, 200
+                except Exception as e:
+                    return {"error": str(e)}, 400
+            result = { 'message': 'User with email {} does not exist.'.format(recovery_email) }
+            return result, 400
+        result = { 'message': 'Wrong email entered.' }
+        return result, 400
+
+# ResetPasswordUser
+# Resets Users Password
+class UserPasswordResetResource(Resource):
+    """ Resource that resets a user's password """
+    def get(self, token):
+        """
+        Get the user's reset email
+        :return:
+        """
+        result = { 'message': token }
+        return result
+
+    @validate_json
+    def put(self, token):
+        """
+        Get the user's reset email
+        :return:
+        """
+        args = user_parser.parse_args()
+        password = args['password']
+        if len(password) > 6:
+            email = User.decode_auth_token(token)
+            user = User.get_by_email(email)
+            if user:
+                try:
+                    user.update(**args)
+                except IndexError:
+                    result = { 'message': 'Server error on resetting password.' }
+                    return result, 500
+                result = { 'message': 'Password has been reset successfully.' }
+                return result, 200
+            result = { 'message': 'User does not exist anymore.' }
+            return result, 400
+        result = { 'message': 'Password should not be less than 6 characters.' }
+        return result, 400
+
 api.add_resource(UserResource, '/users/<int:user_id>', '/users/<username>')
 api.add_resource(UserCollectionResource, '/users')
 api.add_resource(UserSigninResource, '/users/signin')
 api.add_resource(UserSignoutResource, '/users/signout')
+api.add_resource(UserSendRecoveryResource, '/users/recovery')
+api.add_resource(UserPasswordResetResource, '/users/reset/<token>')

@@ -16,7 +16,7 @@ from .token import Token
 
 class User(SurrogatePK, Model):
     __tablename__ = 'users'
-    username = db.Column(db.String(100), unique=True, nullable=False)
+    username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(256), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
     first_name = db.Column(db.String(50), nullable=True)
@@ -69,6 +69,25 @@ class User(SurrogatePK, Model):
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(days=2),
                 'iat': datetime.datetime.utcnow(),
                 'sub': user_id
+            }
+            return jwt.encode(
+                payload,
+                app.config['SECRET_KEY'],
+                algorithm='HS256'
+            )
+        except Exception as e:
+            return e
+    
+    def encode_recovery_token(self, email):
+        """
+        Generates the Recovery Token
+        :return: string
+        """
+        try:
+            payload = {
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1),
+                'iat': datetime.datetime.utcnow(),
+                'sub': email
             }
             return jwt.encode(
                 payload,

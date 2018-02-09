@@ -11,6 +11,7 @@ from code.settings import ProdConfig, DevConfig
 from code.extensions import (
     db,
     migrate,
+    mail,
 )
 from code.api import api_blueprint
 
@@ -34,7 +35,7 @@ def create_app(config_object=DefaultConfig):
         """ Here the user sees the signup and signin gateways """
         return render_template('index.html', title='Home')
     # Enabling cors
-    CORS(app)	
+    CORS(app)
     register_extensions(app)
     register_blueprints(app)
     error_handlers(app)
@@ -45,6 +46,7 @@ def create_app(config_object=DefaultConfig):
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
+    mail.init_app(app)
 
 
 def register_blueprints(app):

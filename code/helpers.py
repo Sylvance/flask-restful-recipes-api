@@ -52,11 +52,11 @@ def abort_if_exists(user_id, category_name=None, category_id=None, recipe_name=N
         for category in categories:
             categorylist.append((category.title).lower())
         if category_name.lower() in categorylist:
-            abort(400, {"status" : "Bad request","state" : "Category already exists"})
+            abort(409, {"message" : "Category already exists"})
     if recipe_name:
         category = Category.get_by_id(category_id)
         if category.user_id == user_id:
             if Recipe.recipe_exists(category_id, recipe_name):
-                abort(400, {"status" : "Bad request","state" : "Recipe already exists"})
+                abort(409, {"message" : "Recipe already exists"})
         else:
-            abort(403, {"status" : "Access denied","state" : "Category does not belong to this user"})
+            abort(403, {"message" : "Category does not belong to this user"})
