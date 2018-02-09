@@ -19,3 +19,5 @@ gunicorn
 
 # Auth
 Flask-JWT
+
+Flask-Mail
