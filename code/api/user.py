@@ -214,12 +214,14 @@ class UserSendRecoveryResource(Resource):
                 recover_url = api.url_for(UserPasswordResetResource, token=token, _external=True)
                 try:
                     msg = Message("Reset password Token", sender="kerandisylvance@gmail.com", recipients=[recovery_email])
-                    msg.html = "<h3>Hello, </h3>" \
+                    msg.html = "<h3> Hi there, </h3>" \
                             "<hr/>" \
                             "<p>Click on this link to reset your password" \
                             "Recover url: " '<p>''<strong>' + recover_url +'</strong>''</p>' \
-                            '<p> This url expires in 24 Hours so make sure' \
-                            'to reset the password before then</p>'
+                            '<p> You will not be able to use this url in the next 24 Hours.' \
+                            'Please reset your password before then.</p>'
+                            "<hr/>" \
+                            "<h5>Yummy recipes password.</h5>" \
                     with current_app.app_context():
                         mail.send(msg)
                     result = { 'message': 'Recovery email has been sent.' }
