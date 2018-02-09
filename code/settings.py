@@ -13,6 +13,12 @@ class Config(object):
 
     SECRET_KEY = os.getenv('SECRET_KEY', 'xoi82SJuX98#*$aIAjakj3sus')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql:///recipesdemo')
+    MAIL_SERVER=os.getenv('MAIL_SERVER')
+    MAIL_PORT=465
+    MAIL_USE_SSL=True
+    MAIL_USE_TLS=False
+    MAIL_USERNAME=os.getenv('MAIL_USERNAME')
+    MAIL_PASSWORD=os.getenv('MAIL_PASSWORD')
 
 
 class ProdConfig(Config):

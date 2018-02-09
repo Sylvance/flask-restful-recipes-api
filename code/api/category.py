@@ -115,8 +115,8 @@ class CategoryCollectionResource(Resource):
         if args['title'] is not None:
             categories = Category.query.filter(Category.title.ilike(
                 '%' + args['title'] + '%')).filter(Category.user_id == g.user.id)
-            if not categories:
-                abort(404, { "message": "Categories for query do not exist" })
+        if not categories:
+            abort(404, { "message": "No categories to display." })
 
         return categories
 

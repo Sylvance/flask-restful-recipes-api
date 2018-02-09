@@ -12,3 +12,6 @@ db = SQLAlchemy()
 
 from flask_migrate import Migrate
 migrate = Migrate()
+
+from flask_mail import Mail
+mail = Mail()
