@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/Sylvance/flask-restful-recipes-api.svg?branch=master)](https://travis-ci.org/Sylvance/flask-restful-recipes-api)
 [![Coverage Status](https://coveralls.io/repos/github/Sylvance/flask-restful-recipes-api/badge.svg?branch=develop)](https://coveralls.io/github/Sylvance/flask-restful-recipes-api?branch=develop)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f24714bd15134063aec24f1e74c9be79)](https://www.codacy.com/app/Sylvance/flask-restful-recipes-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Sylvance/flask-restful-recipes-api&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fcbebcdd31f3460e885d14c1cd07355b)](https://www.codacy.com/app/Sylvance/flask-restful-recipes-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Sylvance/flask-restful-recipes-api&amp;utm_campaign=Badge_Grade)
 
 # Flask-restful-recipes-api
 Yummy recipes provides a platform for users to keep track of their awesome recipes and share with others if they so wish.
@@ -111,3 +111,9 @@ All URIs are relative to *https://resapi.herokuapp.com/api*
 |---| **POST** /users/signin | Sign in a user
 |---| **GET** /users/signout | Sign out a user
 | :joy: | :open_mouth: | :smile: |
+
+## Acknowledgments
+- God
+- Andela
+- The learning team
+- C 523
