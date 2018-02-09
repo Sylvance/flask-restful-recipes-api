@@ -124,7 +124,7 @@ class RecipeCollectionResource(Resource):
                 '%' + args['title'] + '%')).filter(Recipe.category_id == category.id)
         if not recipes:
             abort(404, { "message": "No recipes to display." })
-
+      
         return recipes
 
     @ensure_auth_header
