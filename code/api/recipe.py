@@ -17,12 +17,12 @@ def valid_str(value, name):
     return value
 
 recipe_parser = reqparse.RequestParser()
-recipe_parser.add_argument('title', type=valid_str)
-recipe_parser.add_argument('description', type=valid_str)
+recipe_parser.add_argument('title', type=str)
+recipe_parser.add_argument('description', type=str)
 recipe_parser.add_argument('category_id', type=int)
 
 recipe_collection_parser = reqparse.RequestParser()
-recipe_collection_parser.add_argument('title', type=valid_str)
+recipe_collection_parser.add_argument('title', type=str)
 
 
 # Marshaled field definitions for recipe objects
@@ -90,7 +90,8 @@ class RecipeResource(Resource):
         recipe.delete()
         result = {
             'status': 'Deleted',
-            'message': 'Recipe deleted successfully'
+            'message': 'Recipe deleted successfully',
+            'id': recipe_id
         }
         return result
 

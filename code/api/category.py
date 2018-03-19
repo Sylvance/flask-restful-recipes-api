@@ -17,10 +17,10 @@ def valid_str(value, name):
     return value
 
 category_parser = reqparse.RequestParser()
-category_parser.add_argument('title', type=valid_str)
+category_parser.add_argument('title', type=str)
 category_parser.add_argument('description', type=str)
 category_collection_parser = reqparse.RequestParser()
-category_collection_parser.add_argument('title', type=valid_str)
+category_collection_parser.add_argument('title', type=str)
 
 
 # Marshaled field definitions for category objects
@@ -83,7 +83,8 @@ class CategoryResource(Resource):
         category.delete()
         result = {
             'status': 'Deleted',
-            'message': 'Category deleted successfully'
+            'message': 'Category deleted successfully',
+            'id': category_id
         }
         return result
 

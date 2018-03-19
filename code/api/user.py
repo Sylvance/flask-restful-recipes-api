@@ -157,7 +157,7 @@ class UserSigninResource(Resource):
             user = User.get_by_email(email)
             if user and user.check_password(password):
                 token = user.encode_auth_token(user.id)
-                result = { 'message': 'User has signed in successfully.', 'token' : token.decode("utf-8") }
+                result = { 'message': 'User has signed in successfully.', 'token' : token.decode("utf-8"), 'userid': user.id }
                 return result, 200
             result = { 'message': 'User does not exist or incorrect password.' }
             return result, 400
