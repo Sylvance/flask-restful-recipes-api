@@ -117,3 +117,6 @@ All URIs are relative to *https://resapi.herokuapp.com/api*
 - Andela
 - The learning team
 - C 523
+
+## Author
+Sylvance Kerandi
